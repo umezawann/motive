@@ -1,3 +1,5 @@
+import Year from '../Year/Year';
+
 interface Prop {
   histories: any[];
 }
@@ -9,21 +11,8 @@ const History = ({ histories }: Prop) => {
       {histories.map((his, idx) => (
         <div key={idx}>{his.name}</div>
       ))}
+      <Year />
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', width: 280 }}>
-        {todos.map((todo, idx) => (
-          <div
-            key={idx}
-            style={{
-              width: 20,
-              height: 20,
-              display: 'inline-block',
-              border: '1px solid #ccc',
-              background: 'green',
-            }}
-          />
-        ))}
-      </div>
     </div>
   );
 };
