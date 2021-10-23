@@ -1,6 +1,27 @@
-const Cell = () => {
-  return (
-    <div style={{width: 10, height: 10, display: 'inline-block', background: 'red', borderRadius: 2}} />
-  )
+interface Prop {
+  points: number;
 }
-export default Cell
+
+const gray = '#ebedf0';
+const paleGreen = '#9be9a8';
+const lightgreen = '#40c463';
+const green = '#30a14e';
+const darkGreen = '#216e39';
+const colors = [gray, paleGreen, lightgreen, green, darkGreen];
+
+const Cell = ({ points }: Prop) => {
+  const idx = Math.floor(Math.random() * colors.length);
+  const color = colors[idx];
+  return (
+    <div
+      style={{
+        width: 10,
+        height: 10,
+        display: 'inline-block',
+        background: color,
+        borderRadius: 2,
+      }}
+    />
+  );
+};
+export default Cell;
