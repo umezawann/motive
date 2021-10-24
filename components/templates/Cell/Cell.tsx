@@ -9,7 +9,7 @@ export interface TaskProp {
 }
 
 export interface CellProp {
-  tasks: Task[];
+  tasks: TaskProp[];
 }
 
 const gray = '#ebedf0';
@@ -20,12 +20,17 @@ const darkGreen = '#216e39';
 const colors = [gray, paleGreen, lightgreen, green, darkGreen];
 
 const Cell = ({ tasks }: CellProp) => {
-  const idx = Math.floor(Math.random() * colors.length);
-  const color = colors[idx];
-  const getColor = (tasks: any[], colors: string[]) => {
-
+  const getColor = (tasks?: any[]) => {
+    const count = tasks ? tasks.length : 0
+    if (count === 0) {
+      return colors[0]
+    } else if (count > 4) {
+      return colors[4]
+    } else {
+      return colors[count]
+    }
   }
-  // console.log('color, tasks', color, tasks)
+
   const message = tasks ? tasks.map(t => (t.name)).join('\n') : 'none'
   return (
     <>
@@ -35,7 +40,7 @@ const Cell = ({ tasks }: CellProp) => {
             width: 10,
             height: 10,
             display: 'inline-block',
-            background: color,
+            background: getColor(tasks),
             borderRadius: 2,
           }}
         />
