@@ -1,14 +1,8 @@
 import dayjs from 'dayjs'
 import {getDaysInYear, isSameDay} from '../../../lib/date/getDaysInYear'
-import Cell from '../../templates/Cell/Cell'
-
+import Cell, {TaskProp} from '../../templates/Cell/Cell'
 interface Prop {
-  tasks: {
-    name: string
-    status: 'done',
-    point: number,
-    date: Date,
-  }[];
+  tasks: TaskProp[];
 }
 
 const KEY_FORMAT = 'YYYY-MM-DD'
