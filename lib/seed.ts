@@ -11,7 +11,7 @@ const generateTask = (count: number) => {
 
   const tasks = Array(count).fill(0).map((_, i) => {
     const task = {...baseTask}
-    const randomDay = Math.floor(Math.random() * 100)
+    const randomDay = Math.floor(Math.random() * 300)
     task.date = dayjs(task.date).add(randomDay, 'day').toDate()
     task.name = faker.lorem.sentence()
 
@@ -20,6 +20,6 @@ const generateTask = (count: number) => {
 
   return tasks
 }
-const tasks = generateTask(100)
+const tasks = generateTask(300)
 
 export {tasks}

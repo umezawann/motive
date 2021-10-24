@@ -23,9 +23,10 @@ const Cell = ({ tasks }: CellProp) => {
   const idx = Math.floor(Math.random() * colors.length);
   const color = colors[idx];
   // console.log('color, tasks', color, tasks)
+  const message = tasks ? tasks.map(t => (t.name)).join('\n') : 'none'
   return (
     <>
-      <Tooltip title="Add" arrow>
+      <Tooltip title={message} arrow>
         <div
           style={{
             width: 10,
