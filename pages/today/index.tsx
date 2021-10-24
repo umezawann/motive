@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import History from '../../components/templates/History/History'
-import {histories} from '../../lib/seed'
+import Year from '../../components/templates/Year/Year'
+import {tasks} from '../../lib/seed'
 
 const Today: NextPage = () => {
   const onSubmit = (event: any) => {
@@ -25,7 +25,7 @@ const Today: NextPage = () => {
           Login
         </Button>
       </form>
-      <History histories={histories} />
+      <Year tasks={tasks} />
     </div>
   );
 };

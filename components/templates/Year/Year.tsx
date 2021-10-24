@@ -1,6 +1,10 @@
 import Week from '../Week/Week';
+interface Prop {
+  tasks: any[];
+}
 
-const Year = () => {
+const Year = ({ tasks }: Prop) => {
+  console.log('tasks', tasks)
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {Array(54)
