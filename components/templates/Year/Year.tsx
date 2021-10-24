@@ -1,19 +1,47 @@
-import Week from '../Week/Week';
+import dayjs from 'dayjs'
+import {getDaysInYear, isSameDay} from '../../../lib/date/getDaysInYear'
+import Cell from '../../templates/Cell/Cell'
+
 interface Prop {
-  tasks: any[];
+  tasks: {
+    name: string
+    status: 'done',
+    point: number,
+    date: Date,
+  }[];
 }
 
+const KEY_FORMAT = 'YYYY-MM-DD'
 const Year = ({ tasks }: Prop) => {
-  console.log('tasks', tasks)
+  const days = getDaysInYear()
+
+  const tasksPerDay = {} as any
+  for (const task of tasks) {
+    const key = dayjs(task.date).format(KEY_FORMAT)
+    if (!(key in tasksPerDay)) tasksPerDay[key] = []
+
+    tasksPerDay[key].push(task)
+  }
+
+  const getTasksInDay = (date: Date) => {
+    const key = dayjs(date).format(KEY_FORMAT)
+    return tasksPerDay[key]
+  }
+
+  console.log('tasksPerDay', tasksPerDay)
+
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      {Array(54)
-        .fill(0)
-        .map((_, idx) => (
-          <div key={idx} style={{ margin: 1 }}>
-            <Week key={idx} />
+      {days.map((week, idx) => (
+        <div key={idx} style={{ margin: 1 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', height: 84, justifyContent: 'space-between'}}>
+            {week.map((day, idxx) => (
+              <Cell key={idxx} tasks={getTasksInDay(day)} />
+            ))}
           </div>
-        ))}
+        </div>
+      ))}
+
     </div>
   );
 };

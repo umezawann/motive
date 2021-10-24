@@ -6,7 +6,7 @@ const generateTask = (count: number) => {
     name: 'name',
     status: 'done',
     point: 1,
-    date: new Date(),
+    date: dayjs().startOf('year').toDate(),
   }
 
   const tasks = Array(count).fill(0).map((_, i) => {
