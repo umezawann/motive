@@ -11,17 +11,28 @@ datasource db {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   email String  @unique
   name  String?
-  posts Post[]
 }
 
-model Post {
-  id        Int      @default(autoincrement()) @id
-  title     String
-  content   String?
+enum TaskStatus {
+  TODO
+  DONE
+}
+
+model Task {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title  String
+  date   DateTime
+  status TaskStatus
+  point  Int
+
   published Boolean? @default(false)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
 }
