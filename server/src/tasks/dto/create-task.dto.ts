@@ -1,15 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger'
+
+export enum TaskStatusEnum {
+  TODO = 'TODO',
+  DONE = 'DONE',
+}
+
 export class CreateTaskDto {
   @ApiProperty()
-  date?: Date
+  date: Date
 
   @ApiProperty()
-  title?: string
+  title: string
+
+  @ApiProperty({ enum: TaskStatusEnum, default: 'TODO', isArray: false })
+  status: TaskStatusEnum
 
   @ApiProperty()
-  status?: string
-
-  @ApiProperty()
-  point?: number
+  point: number
 }
 

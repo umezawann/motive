@@ -33,6 +33,4 @@ model Task {
   date   DateTime
   status TaskStatus
   point  Int
-
-  published Boolean? @default(false)
 }
