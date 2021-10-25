@@ -12,5 +12,7 @@
   - サブタスクを作成できるように
 - mobileアプリにて、ウィジェットを提供する
 - ボード機能
-- デフォルトの画面はweekly
-- weekly/today/boardをトグルできるように
+- デフォルトの画面はtoday
+- upcoming/today/boardをトグルできるように
+- upcomingの機能（https://todoist.com/app/upcoming）
+- redux導入

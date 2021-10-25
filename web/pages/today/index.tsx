@@ -5,20 +5,14 @@ import Button from '@mui/material/Button';
 import Year from '@/components/templates/Year/Year'
 import {tasks} from '@/lib/seed'
 import TaskForm from '@/components/templates/TaskForm/TaskForm'
+import {useHooks} from './hooks'
 
 const Today: NextPage = () => {
-  const onSubmit = (event: any) => {
-    event.preventDefault();
-    const name = event.target.name.value;
-    const body = event.target.body.value;
-    console.log('name is', name);
-    console.log('body is', body);
-  };
-
+  const {onSubmit} = useHooks()
   return (
     <div>
-      <div>today</div>
-      <TaskForm />
+      <div>本日のタスク</div>
+      <TaskForm onSubmit={onSubmit} />
       <Year tasks={tasks} />
     </div>
   );
