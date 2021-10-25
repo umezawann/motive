@@ -3,7 +3,7 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
 
 interface TaskFormProps {
-  onSubmit: (values: any) => void;
+  onSubmit: (values: any) => Promise<void>;
 }
 
 interface IFormInput {
