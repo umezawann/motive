@@ -1,26 +1,30 @@
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+// import Select from "react-select";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import TextField from '@mui/material/TextField';
 
-type Inputs = {
-  example: string,
-  exampleRequired: string,
-};
+interface IFormInput {
+  name: string;
+}
 
-export default function TaskForm() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+const TaskForm = () => {
+  const { control, handleSubmit } = useForm<IFormInput>();
 
-  console.log(watch("example")) // watch input value by passing the name of it
+  const onSubmit: SubmitHandler<IFormInput> = data => {
+    console.log(data)
+  };
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <input defaultValue="test" {...register("example")} />
-
-      {errors.exampleRequired && <span>This field is required</span>}
-
+      <Controller
+        name="name"
+        control={control}
+        defaultValue="test value"
+        render={({ field }) => <TextField {...field} />}
+      />
       <input type="submit" />
     </form>
   );
-}
+};
+
+export default TaskForm
