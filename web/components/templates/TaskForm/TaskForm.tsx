@@ -1,5 +1,4 @@
 import React from "react";
-// import Select from "react-select";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import TextField from '@mui/material/TextField';
 
@@ -11,7 +10,9 @@ const TaskForm = () => {
   const { control, handleSubmit } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
+    const body = {...data, point: 1, status: 'todo', date: new Date()}
     console.log(data)
+    console.log('body is', body)
   };
 
   return (

@@ -19,14 +19,6 @@ const Today: NextPage = () => {
     <div>
       <div>today</div>
       <TaskForm />
-      <form onSubmit={onSubmit}>
-        <TextField label="name" name="name" />
-        <TextField label="body" name="body" />
-
-        <Button type="submit" variant="contained" color="inherit">
-          Login
-        </Button>
-      </form>
       <Year tasks={tasks} />
     </div>
   );
