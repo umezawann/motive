@@ -13,9 +13,12 @@ $ npm install
 ```bash
 # development
 $ npm run start:dev
+```
+## Running the docker
 
-# production mode
-$ npm run start:prod
+```bash
+# development
+$ docker-compose run
 ```
 
 ## Test
