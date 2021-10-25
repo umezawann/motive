@@ -7,7 +7,7 @@ interface TaskFormProps {
 }
 
 interface IFormInput {
-  name: string;
+  title: string;
 }
 
 const TaskForm = ({ onSubmit }: TaskFormProps) => {
@@ -16,7 +16,7 @@ const TaskForm = ({ onSubmit }: TaskFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name="name"
+        name="title"
         control={control}
         defaultValue="test value"
         render={({ field }) => <TextField {...field} />}

@@ -3,7 +3,7 @@ import faker  from 'faker'
 
 const generateTask = (count: number) => {
   const baseTask = {
-    name: 'name',
+    title: 'title',
     status: 'done',
     point: 1,
     date: dayjs().startOf('year').toDate(),
@@ -13,7 +13,7 @@ const generateTask = (count: number) => {
     const task = {...baseTask}
     const randomDay = Math.floor(Math.random() * 300)
     task.date = dayjs(task.date).add(randomDay, 'day').toDate()
-    task.name = faker.lorem.sentence()
+    task.title = faker.lorem.sentence()
 
     return task
   })
