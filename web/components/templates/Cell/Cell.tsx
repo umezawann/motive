@@ -2,6 +2,7 @@ import React from 'react';
 import Tooltip from '@mui/material/Tooltip';
 
 export interface TaskProp {
+  id: string
   title: string
   status: string,
   point: number,
@@ -31,7 +32,7 @@ const Cell = ({ tasks }: CellProp) => {
     }
   }
 
-  const message = tasks ? tasks.map(t => (t.title)).join('\n') : 'none'
+  const message = tasks ? tasks.map(t => (<div key={t.id}>{t.title}</div>)) : 'none'
   return (
     <>
       <Tooltip title={message} arrow>
