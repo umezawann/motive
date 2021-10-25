@@ -17,6 +17,11 @@ export class TasksController {
     return this.tasksService.findAll();
   }
 
+  @Get('today')
+  async findToday() {
+    return this.tasksService.findToday();
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.tasksService.findOne(id);
