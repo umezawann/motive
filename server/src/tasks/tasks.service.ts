@@ -13,19 +13,22 @@ export class TasksService {
     return task
   }
 
-  findAll() {
-    return `This action returns all tasks`;
+  async findAll() {
+    const tasks = await prisma.task.findMany()
+
+    return tasks;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  async findOne(id: string) {
+    const task = await prisma.task.findUnique({where: {id}})
+    return task;
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
+  update(id: string, updateTaskDto: UpdateTaskDto) {
     return `This action updates a #${id} task`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} task`;
   }
 }
