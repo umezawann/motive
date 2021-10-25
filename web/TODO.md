@@ -11,6 +11,9 @@
 - タスク作成機能
   - サブタスクを作成できるように
 - mobileアプリにて、ウィジェットを提供する
+- dockerを導入
+- prismaを導入
+- mysqlを導入
 - ボード機能
 - デフォルトの画面はweekly
 - weekly/today/boardをトグルできるように
