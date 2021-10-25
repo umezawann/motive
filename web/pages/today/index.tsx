@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import type { NextPage } from 'next';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Year from '../../components/templates/Year/Year'
-import {tasks} from '../../lib/seed'
+import Year from '@/components/templates/Year/Year'
+import {tasks} from '@/lib/seed'
+import TaskForm from '@/components/templates/TaskForm/TaskForm'
 
 const Today: NextPage = () => {
   const onSubmit = (event: any) => {
@@ -17,6 +18,7 @@ const Today: NextPage = () => {
   return (
     <div>
       <div>today</div>
+      <TaskForm />
       <form onSubmit={onSubmit}>
         <TextField label="name" name="name" />
         <TextField label="body" name="body" />

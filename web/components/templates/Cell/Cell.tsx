@@ -3,7 +3,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 export interface TaskProp {
   name: string
-  status: 'done',
+  status: string,
   point: number,
   date: Date,
 }
