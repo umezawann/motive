@@ -8,6 +8,8 @@
 $ npm install
 ```
 
+## Get .env
+`.env`をもらう
 ## Running the app
 
 ```bash
