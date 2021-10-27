@@ -6,7 +6,7 @@ import { prisma } from '@/prisma';
 @Injectable()
 export class TasksService {
   async create(createTaskDto: CreateTaskDto) {
-    console.log('tasks.service')
+    console.log('tasks.service');
     console.log('createTaskDto', createTaskDto);
 
     const task = await prisma.task.create({ data: createTaskDto });
@@ -26,23 +26,22 @@ export class TasksService {
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let today = `${year}-${month}-${day} ${hours}:${minutes}`;
-    let tomorrow = `${year}-${month}-${day + 1} ${hours}:${minutes}`;
-    console.log('today', today);
-    console.log('tomorrow', tomorrow);
+    let today = `${year}-${month}-${day}`;
+    let start = `${today} 00:00`;
+    let deadline = `${today} 23:59`;
+    console.log('start', start);
+    console.log('deadline', deadline);
     const tasks = await prisma.task.findMany({
       where: {
         AND: [
           {
             date: {
-              gte: new Date(today),
+              gte: new Date(start),
             },
           },
           {
             date: {
-              lte: new Date(tomorrow),
+              lte: new Date(deadline),
             },
           },
         ],
