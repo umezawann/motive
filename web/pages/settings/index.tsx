@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
+import BaseLayout from '@/components/templates/Layouts/BaseLayout'
 
 const Settings: NextPage = () => {
   return (
-    <div>
+    <BaseLayout>
       <div>settings/link</div>
-    </div>
+    </BaseLayout>
   );
 };
 

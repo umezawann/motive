@@ -6,7 +6,8 @@ import { prisma } from '@/prisma';
 @Injectable()
 export class TasksService {
   async create(createTaskDto: CreateTaskDto) {
-    conesol.log('tasks.service')
+    console.log('tasks.service')
+
     console.log('createTaskDto', createTaskDto);
 
     const task = await prisma.task.create({ data: createTaskDto });
