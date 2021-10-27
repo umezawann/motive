@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Year from '@/components/templates/Year/Year';
 import TaskForm from '@/components/templates/TaskForm/TaskForm';
 import { useHooks } from './hooks';
+import Color from '@/components/templates/Color/color';
 
 const Today: NextPage = () => {
   const { onSubmit, tasks, tasksInYear } = useHooks();
@@ -17,6 +18,7 @@ const Today: NextPage = () => {
       ))}
 
       {tasksInYear && <Year tasks={tasksInYear} />}
+      <Color />
     </div>
   );
 };

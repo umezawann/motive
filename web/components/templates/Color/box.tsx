@@ -1,6 +1,16 @@
-const Box = () => {
+const Box = ({ children }) => {
   return (
-    <div style={{ width: "10px", height: "10px", borderRadius: "5px", backgroundColor: 'green' }}></div>
+    <div
+      style={{
+        width: "20px",
+        height: "20px",
+        borderRadius: "2px",
+        
+        margin: "2.5px",
+      }}
+    >
+      {children}
+    </div>
   );
 };
 
