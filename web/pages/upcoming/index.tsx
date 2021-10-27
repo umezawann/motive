@@ -28,7 +28,7 @@ const Today: NextPage = () => {
     <BaseLayout>
     <>
       <div>upcoming</div>
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={7}>
         {days.map((d, i) => (
           <div key={i}>
             {/* TODO: hogehogeを消すとstyleが崩れてしまう */}
