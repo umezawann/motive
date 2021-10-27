@@ -5,6 +5,8 @@ import TaskForm from '@/components/templates/TaskForm/TaskForm';
 import Stack from '@mui/material/Stack';
 import dayjs from 'dayjs';
 import { Divider } from '@mui/material';
+import BaseLayout from '@/components/templates/Layouts/BaseLayout'
+
 const Today: NextPage = () => {
   // const { onSubmit, tasks, tasksInYear } = useHooks();
   const today = dayjs();
@@ -20,7 +22,8 @@ const Today: NextPage = () => {
     .map((_, i) => dayjs(today).add(i, 'day').toDate());
 
   return (
-    <div>
+    <BaseLayout>
+    <>
       <div>upcoming</div>
       <Stack direction="row" spacing={2}>
         {days.map((d, i) => (
@@ -35,12 +38,15 @@ const Today: NextPage = () => {
       <Stack spacing={2}>
         {days.map((d, i) => (
           <div key={i}>
+            {/* TODO: この日の一言 */}
+            {/* TODO: この日のタスク */}
             <div>{getWeekDay(d)}</div>
             <Divider />
           </div>
         ))}
       </Stack>
-    </div>
+      </>
+    </BaseLayout>
   );
 };
 
