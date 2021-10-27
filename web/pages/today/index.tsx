@@ -4,13 +4,14 @@ import Year from '@/components/templates/Year/Year';
 import TaskForm from '@/components/templates/TaskForm/TaskForm';
 import { useHooks } from './hooks';
 import Color from '@/components/templates/Color/color';
+import BaseLayout from '@/components/templates/Layouts/BaseLayout'
 
 const Today: NextPage = () => {
   const { onSubmit, tasks, tasksInYear } = useHooks();
 
   console.log('tasks', tasks);
   return (
-    <div>
+    <BaseLayout>
       <div>本日のタスク</div>
       <TaskForm onSubmit={onSubmit} />
       {tasks && tasks.map(t => (
@@ -19,7 +20,7 @@ const Today: NextPage = () => {
 
       {tasksInYear && <Year tasks={tasksInYear} />}
       <Color />
-    </div>
+      </BaseLayout>
   );
 };
 
