@@ -10,18 +10,7 @@ export class TasksService {
 
     const task = await prisma.task.create({ data: createTaskDto });
 
-    
     return task;
-    const date = new Date()
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let today = `${year}-${month}-${day} ${hours}:${minutes}`
-    let tomorrow = `${year}-${month}-${day+1} ${hours}:${minutes}`
-    console.log('today',today);
-    console.log('tomorrow',tomorrow);
   }
 
   async findAll() {
@@ -31,22 +20,29 @@ export class TasksService {
   }
 
   async findToday() {
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let today = `${year}-${month}-${day} ${hours}:${minutes}`;
+    let tomorrow = `${year}-${month}-${day + 1} ${hours}:${minutes}`;
+    console.log('today', today);
+    console.log('tomorrow', tomorrow);
     const tasks = await prisma.task.findMany({
       where: {
         AND: [
           {
             date: {
-              gte: {today}
+              gte: today,
             },
           },
           {
             date: {
-              lte: new Date(
-                '2021-10-26T00:00:00+0900',
-              )
+              lte: tomorrow,
             },
           },
-
         ],
       },
     });
