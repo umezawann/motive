@@ -20,6 +20,7 @@ export class TasksService {
   }
 
   async findToday() {
+    console.log('first');
     const date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -35,12 +36,12 @@ export class TasksService {
         AND: [
           {
             date: {
-              gte: today,
+              gte: new Date(today),
             },
           },
           {
             date: {
-              lte: tomorrow,
+              lte: new Date(tomorrow),
             },
           },
         ],
