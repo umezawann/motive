@@ -9,7 +9,8 @@ export class TasksController {
 
   @Post()
   async create(@Body() createTaskDto: CreateTaskDto) {
-    console.log('tasks.controller')
+    console.log('tasks create')
+    console.log(createTaskDto)
     return await this.tasksService.create(createTaskDto);
   }
 
