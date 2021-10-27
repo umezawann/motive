@@ -12,10 +12,13 @@ const Today: NextPage = () => {
   const today = dayjs();
 
   const getDay = (date: Date) => {
-    return dayjs(date).format('MM月DD日');
+    return dayjs(date).format('DD');
   };
   const getWeekDay = (date: Date) => {
-    return dayjs(date).get('day');
+    return dayjs(date).format('dd');
+  };
+  const getFullDay = (date: Date) => {
+    return dayjs(date).format('MM月D日 dd');
   };
   const days = Array(100)
     .fill(0)
@@ -29,7 +32,7 @@ const Today: NextPage = () => {
         {days.map((d, i) => (
           <div key={i}>
             {/* TODO: hogehogeを消すとstyleが崩れてしまう */}
-            <div>hogehoge{getWeekDay(d)}</div>
+            <div>{getWeekDay(d)}</div>
             <div>{getDay(d)}</div>
           </div>
         ))}
@@ -40,7 +43,7 @@ const Today: NextPage = () => {
           <div key={i}>
             {/* TODO: この日の一言 */}
             {/* TODO: この日のタスク */}
-            <div>{getWeekDay(d)}</div>
+            <div>{getFullDay(d)}</div>
             <Divider />
           </div>
         ))}
