@@ -5,7 +5,6 @@ const Box = ({ children }) => {
         width: "20px",
         height: "20px",
         borderRadius: "2px",
-        
         margin: "2.5px",
       }}
     >
