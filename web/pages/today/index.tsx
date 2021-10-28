@@ -22,12 +22,8 @@ const Today: NextPage = () => {
       ))}
 
       {tasksInYear && <Year tasks={tasksInYear} />}
-
       <Color />
-    </div>
-
       </BaseLayout>
-
   );
 };
 

@@ -1,12 +1,15 @@
-import { borderRight } from "@mui/system";
-import Box from "./box";
+import { borderRight } from '@mui/system';
+import Box from './box';
 
 const Color = () => {
   return (
-    <div style={{ display: "flex", justifyContent: "flex-start" }}>
-      <div style={{ lineHeight: "20px" }}>Less</div>
+    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <div style={{ lineHeight: '20px' }}>Less</div>
+      {/* こんな感じで渡せる */}
+      <Box style={{ background: 'yellow' }} />
 
-      <Box>
+      {/* TODO: ここをループ（map）で簡潔に書きたい */}
+      {/* <Box>
         <div style={{ opacity: "0.1", backgroundColor: "green" }} />
       </Box>
       <Box>
@@ -20,7 +23,7 @@ const Color = () => {
       </Box>
       <Box>
         <div style={{ opacity: "1.0", backgroundColor: "green" }} />
-      </Box>
+      </Box> */}
 
       <div>More</div>
     </div>
