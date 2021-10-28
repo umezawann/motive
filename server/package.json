@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "0.0.1",
-  "description": "",
+  "description": "[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
@@ -72,5 +72,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
   }
 }

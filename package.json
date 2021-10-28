@@ -1,0 +1,19 @@
+{
+  "name": "motive",
+  "version": "1.0.0",
+  "description": "- server - web - mobile",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keisukee/motive.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keisukee/motive/issues"
+  },
+  "homepage": "https://github.com/keisukee/motive#readme"
+}
