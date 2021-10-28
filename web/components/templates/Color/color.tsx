@@ -1,7 +1,26 @@
 import { borderRight } from '@mui/system';
 import Box from './box';
 
+const Box = ({ children, ...props }: { children?: any; props?: any }) => {
+  console.log('box props', props);
+  const { style } = props;
+  return (
+    <div
+      style={{
+        width: '20px',
+        height: '20px',
+        borderRadius: '2px',
+        margin: '2.5px',
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
 const Color = () => {
+
+  
   return (
     <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
       <div style={{ lineHeight: '20px' }}>Less</div>
