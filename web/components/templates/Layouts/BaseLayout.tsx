@@ -131,6 +131,7 @@ export default function BaseLayout({ children }: { children: any }) {
             top: "50%",
             right: "10px",
             transform: "translateY(-50%)",
+            height: '24px'
           }}
         >
           <AccountCircleIcon
