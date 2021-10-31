@@ -21,16 +21,20 @@ export class TasksService {
   }
 
   async findToday() {
-    console.log('first');
-    const date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let today = `${year}-${month}-${day}`;
-    let start = `${today} 00:00`;
-    let deadline = `${today} 23:59`;
-    console.log('start', start);
-    console.log('deadline', deadline);
+    let today = new Date();
+    let tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    let dates = [today, tomorrow].map((date) => {
+      const d = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      return d;
+    });
+
+    let start = `${dates[0]} 00:00`;
+    let deadline = `${dates[1]} 00:00`;
+    console.log('start is', start);
+    console.log('deadline is', deadline);
+
     const tasks = await prisma.task.findMany({
       where: {
         AND: [
@@ -41,7 +45,7 @@ export class TasksService {
           },
           {
             date: {
-              lte: new Date(deadline),
+              lt: new Date(deadline),
             },
           },
         ],
