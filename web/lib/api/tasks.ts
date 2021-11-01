@@ -1,7 +1,7 @@
-import { useAxios } from '@/lib/axios';
+import { useApiClient } from '@/lib/api/apiClient';
 
 const useTasksOfDay = () => {
-  const { response, loading, error } = useAxios({
+  const { response, loading, error } = useApiClient({
     method: 'GET',
     url: '/tasks/today',
   });
@@ -10,7 +10,7 @@ const useTasksOfDay = () => {
 };
 
 const useTasksInYear = () => {
-  const { response, loading, error } = useAxios({
+  const { response, loading, error } = useApiClient({
     method: 'GET',
     url: '/tasks',
   });

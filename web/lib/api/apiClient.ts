@@ -1,13 +1,16 @@
 import { useAxios } from '@/lib/axios';
 
-const useApiClient = () => {
+export const useApiClient = ({
+  method,
+  url,
+}: {
+  method: 'GET' | 'POST' | 'DELETE';
+  url: string;
+}) => {
   const { response, loading, error } = useAxios({
-    method: 'GET',
-    url: '/tasks/today',
+    method: method,
+    url: url,
   });
 
-  return { data: response, loading, error };
-}
-
-// TODO: 後で書く
-export {useApiClient}
+  return { response, loading, error };
+};

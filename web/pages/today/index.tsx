@@ -19,8 +19,6 @@ const Today: NextPage = () => {
             <div style={{ margin: 'auto' }}>本日のタスク</div>
             <TaskForm onSubmit={onSubmit} />
             {tasks && tasks.map((t) => <div key={t.id}>{t.title}</div>)}
-
-            {tasksInYear && <Year tasks={tasksInYear} />}
           </div>
         </Grid>
         <Grid item xs={2} sm={2} />
