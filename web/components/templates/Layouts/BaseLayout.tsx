@@ -127,9 +127,8 @@ export default function BaseLayout({ children }: { children: any }) {
                   textDecoration: "none",
                   fontWeight: "bold",
                   color: "white",
-                  fontSize: '22px'
+                  fontSize: '22px',
                 }}
-                onMouseOver="this.style.textDecoration='underline'"
               >
                 Motive
               </a>
