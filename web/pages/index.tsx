@@ -25,6 +25,11 @@ const Home: NextPage = () => {
             </Link>
           </li>
           <li>
+            <Link href={getRoutes('logs')}>
+              <a>logs</a>
+            </Link>
+          </li>
+          <li>
             <Link href={getRoutes('settings')}>
               <a>settings</a>
             </Link>
