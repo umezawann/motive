@@ -122,7 +122,17 @@ export default function BaseLayout({ children }: { children: any }) {
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             <Link href={getRoutes("root")}>
-              <a>Motive</a>
+              <a
+                style={{
+                  textDecoration: "none",
+                  fontWeight: "bold",
+                  color: "white",
+                  fontSize: '22px'
+                }}
+                onMouseOver="this.style.textDecoration='underline'"
+              >
+                Motive
+              </a>
             </Link>
           </Typography>
         </Toolbar>
