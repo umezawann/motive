@@ -58,6 +58,11 @@ export default function VerticalTabs() {
         variant="scrollable"
         value={value}
         onChange={handleChange}
+        TabIndicatorProps={{
+          style: {
+            display: "none",
+          },
+        }}
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
@@ -73,7 +78,7 @@ export default function VerticalTabs() {
         2020
       </TabPanel>
       <TabPanel value={value} index={2}>
-        2029
+        2019
       </TabPanel>
       <TabPanel value={value} index={3}>
         2018
