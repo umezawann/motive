@@ -17,6 +17,9 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
@@ -135,6 +138,22 @@ export default function BaseLayout({ children }: { children: any }) {
             </Link>
           </Typography>
         </Toolbar>
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            right: "10px",
+            transform: "translateY(-50%)",
+          }}
+        >
+          <AccountCircleIcon
+            style={{ marginRight: "10px" }}
+          ></AccountCircleIcon>
+          <AccountCircleIcon
+            style={{ marginRight: "10px" }}
+          ></AccountCircleIcon>
+          <AccountCircleIcon></AccountCircleIcon>
+        </div>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
