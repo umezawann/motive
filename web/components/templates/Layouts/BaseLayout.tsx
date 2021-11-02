@@ -94,6 +94,17 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+const MyComponent = styled("div")({
+  textDecoration: "none",
+  fontWeight: "bold",
+  color: "white",
+  fontSize: "22px",
+  ":hover": {
+    opacity: "0.7",
+    fontStyle: "italic",
+  },
+});
+
 export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -125,15 +136,8 @@ export default function BaseLayout({ children }: { children: any }) {
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             <Link href={getRoutes("root")}>
-              <a
-                style={{
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: '22px',
-                }}
-              >
-                Motive
+              <a>
+                <MyComponent>Motive</MyComponent>
               </a>
             </Link>
           </Typography>
