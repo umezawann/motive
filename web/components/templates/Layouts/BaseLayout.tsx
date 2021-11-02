@@ -22,6 +22,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 
 const drawerWidth = 240;
 
@@ -130,7 +131,7 @@ export default function BaseLayout({ children }: { children: any }) {
                   textDecoration: "none",
                   fontWeight: "bold",
                   color: "white",
-                  fontSize: '22px',
+                  fontSize: "22px",
                 }}
               >
                 Motive
@@ -176,6 +177,14 @@ export default function BaseLayout({ children }: { children: any }) {
               <ListItemText primary={text} />
             </ListItem>
           ))}
+          <ListItem button key={"logs"}>
+            <ListItemIcon>
+              <FormatAlignLeftIcon />
+            </ListItemIcon>
+            <Link href={getRoutes("logs")}>
+              <a style={{ textDecoration: "none", color: "black" }}>logs</a>
+            </Link>
+          </ListItem>
         </List>
         <Divider />
       </Drawer>
