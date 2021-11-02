@@ -5,7 +5,8 @@ import TaskForm from '@/components/templates/TaskForm/TaskForm';
 import Stack from '@mui/material/Stack';
 import dayjs from 'dayjs';
 import { Divider } from '@mui/material';
-import BaseLayout from '@/components/templates/Layouts/BaseLayout'
+import BaseLayout from '@/components/templates/Layouts/BaseLayout';
+import Grid from '@mui/material/Grid';
 
 const Today: NextPage = () => {
   // const { onSubmit, tasks, tasksInYear } = useHooks();
@@ -26,29 +27,26 @@ const Today: NextPage = () => {
 
   return (
     <BaseLayout>
-    <>
-      <div>upcoming</div>
-      <Stack direction="row" spacing={7}>
-        {days.map((d, i) => (
-          <div key={i}>
-            {/* TODO: hogehogeを消すとstyleが崩れてしまう */}
-            <div>{getWeekDay(d)}</div>
-            <div>{getDay(d)}</div>
+      <Grid container spacing={2} >
+        <Grid item xs={2} sm={2} />
+        <Grid item xs={8} sm={8}>
+          <div>
+            <div>upcoming</div>
+            <Stack spacing={2}>
+              {days.map((d, i) => (
+                <div key={i}>
+                  {/* TODO: この日の一言 */}
+                  {/* TODO: この日のタスク */}
+                  <div>{getFullDay(d)}</div>
+                  <Divider />
+                </div>
+              ))}
+            </Stack>
           </div>
-        ))}
-      </Stack>
+        </Grid>
 
-      <Stack spacing={2}>
-        {days.map((d, i) => (
-          <div key={i}>
-            {/* TODO: この日の一言 */}
-            {/* TODO: この日のタスク */}
-            <div>{getFullDay(d)}</div>
-            <Divider />
-          </div>
-        ))}
-      </Stack>
-      </>
+        <Grid item xs={2} sm={2} />
+      </Grid>
     </BaseLayout>
   );
 };
