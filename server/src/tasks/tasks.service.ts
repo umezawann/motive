@@ -21,17 +21,17 @@ export class TasksService {
   }
 
   async findToday() {
-    let today = new Date();
-    let tomorrow = new Date();
+    const today = new Date();
+    const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
 
-    let dates = [today, tomorrow].map((date) => {
+    const dates = [today, tomorrow].map((date) => {
       const d = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
       return d;
     });
 
-    let start = `${dates[0]} 00:00`;
-    let deadline = `${dates[1]} 00:00`;
+    const start = new Date(`${dates[0]} 00:00`);
+    const deadline = new Date(`${dates[1]} 00:00`);
     console.log('start is', start);
     console.log('deadline is', deadline);
 
