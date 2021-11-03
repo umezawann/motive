@@ -124,24 +124,17 @@ export default function BaseLayout({ children }: { children: any }) {
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <div style={{ height: "24px" }}>
+            <AccountCircleIcon
+              style={{ marginRight: "10px" }}
+            ></AccountCircleIcon>
+            <AccountCircleIcon
+              style={{ marginRight: "10px" }}
+            ></AccountCircleIcon>
+            <AccountCircleIcon></AccountCircleIcon>
+          </div>
         </Toolbar>
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            right: "10px",
-            transform: "translateY(-50%)",
-            height: '24px'
-          }}
-        >
-          <AccountCircleIcon
-            style={{ marginRight: "10px" }}
-          ></AccountCircleIcon>
-          <AccountCircleIcon
-            style={{ marginRight: "10px" }}
-          ></AccountCircleIcon>
-          <AccountCircleIcon></AccountCircleIcon>
-        </div>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
