@@ -22,6 +22,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 
 const drawerWidth = 240;
 
@@ -94,7 +95,6 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-
 const MyComponent = styled("div")({
   textDecoration: "none",
   fontWeight: "bold",
@@ -117,6 +117,21 @@ export default function BaseLayout({ children }: { children: any }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const items = [
+    {
+      key: 'today',
+      component:  <AccessTimeIcon />
+    },
+    {
+      key: 'upcoming',
+      component:   <AssignmentIcon />
+    },
+    {
+      key: 'logs',
+      component:  <FormatAlignLeftIcon />
+    },
+  ]
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -153,22 +168,6 @@ export default function BaseLayout({ children }: { children: any }) {
             <AccountCircleIcon></AccountCircleIcon>
           </div>
         </Toolbar>
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            right: "10px",
-            transform: "translateY(-50%)",
-          }}
-        >
-          <AccountCircleIcon
-            style={{ marginRight: "10px" }}
-          ></AccountCircleIcon>
-          <AccountCircleIcon
-            style={{ marginRight: "10px" }}
-          ></AccountCircleIcon>
-          <AccountCircleIcon></AccountCircleIcon>
-        </div>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -182,14 +181,17 @@ export default function BaseLayout({ children }: { children: any }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["today", "upcoming"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index === 0 && <AccessTimeIcon />}
-                {index === 1 && <AssignmentIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+          {items.map((text, index) => (
+            <Link href={getRoutes(text.key)} key={text.key}>
+              <a style={{ textDecoration: "none", color: "black" }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    {text.component}
+                  </ListItemIcon>
+                  <ListItemText primary={text.key} />
+                </ListItem>
+              </a>
+            </Link>
           ))}
         </List>
         <Divider />
