@@ -95,7 +95,6 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-
 const MyComponent = styled("div")({
   textDecoration: "none",
   fontWeight: "bold",
@@ -118,6 +117,21 @@ export default function BaseLayout({ children }: { children: any }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const items = [
+    {
+      key: 'today',
+      component:  <AccessTimeIcon />
+    },
+    {
+      key: 'upcoming',
+      component:   <AssignmentIcon />
+    },
+    {
+      key: 'logs',
+      component:  <FormatAlignLeftIcon />
+    },
+  ]
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -153,7 +167,7 @@ export default function BaseLayout({ children }: { children: any }) {
             ></AccountCircleIcon>
             <AccountCircleIcon></AccountCircleIcon>
           </div>
-        </Toolbar
+        </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -167,23 +181,18 @@ export default function BaseLayout({ children }: { children: any }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["today", "upcoming"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index === 0 && <AccessTimeIcon />}
-                {index === 1 && <AssignmentIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-          <ListItem button key={"logs"}>
-            <ListItemIcon>
-              <FormatAlignLeftIcon />
-            </ListItemIcon>
-            <Link href={getRoutes("logs")}>
-              <a style={{ textDecoration: "none", color: "black" }}>logs</a>
+          {items.map((text, index) => (
+            <Link href={getRoutes(text.key)} key={text.key}>
+              <a style={{ textDecoration: "none", color: "black" }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    {text.component}
+                  </ListItemIcon>
+                  <ListItemText primary={text.key} />
+                </ListItem>
+              </a>
             </Link>
-          </ListItem>
+          ))}
         </List>
         <Divider />
       </Drawer>
