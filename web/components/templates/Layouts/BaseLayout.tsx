@@ -112,6 +112,10 @@ const MyComponent = styled("div")({
 export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+      null
+    );
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -121,10 +125,6 @@ export default function BaseLayout({ children }: { children: any }) {
     setOpen(false);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
-
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -132,6 +132,9 @@ export default function BaseLayout({ children }: { children: any }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const hoge = Boolean(anchorEl);
+
 
   const items = [
     {
@@ -149,10 +152,29 @@ export default function BaseLayout({ children }: { children: any }) {
   ]
 
   return (
+    
     <Box sx={{ display: "flex" }}>
+
+
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
+       <div>
+      <Button variant="contained" onClick={handleClick}>
+        Open Popover
+      </Button>
+      <Popover
+        open={hoge}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+      </Popover>
+    </div>
           <IconButton
             color="inherit"
             aria-label="open drawer"
