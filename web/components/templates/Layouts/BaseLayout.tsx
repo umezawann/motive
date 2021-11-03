@@ -94,6 +94,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+
 const MyComponent = styled("div")({
   textDecoration: "none",
   fontWeight: "bold",
@@ -141,6 +142,16 @@ export default function BaseLayout({ children }: { children: any }) {
               </a>
             </Link>
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <div style={{ height: "24px" }}>
+            <AccountCircleIcon
+              style={{ marginRight: "10px" }}
+            ></AccountCircleIcon>
+            <AccountCircleIcon
+              style={{ marginRight: "10px" }}
+            ></AccountCircleIcon>
+            <AccountCircleIcon></AccountCircleIcon>
+          </div>
         </Toolbar>
         <div
           style={{
