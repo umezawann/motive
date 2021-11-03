@@ -22,6 +22,9 @@ import MailIcon from "@mui/icons-material/Mail";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import Popover from "@mui/material/Popover";
+import Button from '@mui/material/Button';
+
 
 const drawerWidth = 240;
 
@@ -94,6 +97,8 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+const SubMenu = () => {};
+
 export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -105,6 +110,19 @@ export default function BaseLayout({ children }: { children: any }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -130,30 +148,37 @@ export default function BaseLayout({ children }: { children: any }) {
                   textDecoration: "none",
                   fontWeight: "bold",
                   color: "white",
-                  fontSize: '22px',
+                  fontSize: "22px",
                 }}
               >
                 Motive
               </a>
             </Link>
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <div style={{ height: "24px" }}>
+            <AccountCircleIcon
+              style={{ marginRight: "10px" }}
+            ></AccountCircleIcon>
+            <Button
+              style={{ marginRight: "10px" }}
+              onClick={handleClick}
+            >open</Button>
+            <Popover
+
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+            >
+              <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+            </Popover>
+            <AccountCircleIcon></AccountCircleIcon>
+          </div>
         </Toolbar>
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            right: "10px",
-            transform: "translateY(-50%)",
-          }}
-        >
-          <AccountCircleIcon
-            style={{ marginRight: "10px" }}
-          ></AccountCircleIcon>
-          <AccountCircleIcon
-            style={{ marginRight: "10px" }}
-          ></AccountCircleIcon>
-          <AccountCircleIcon></AccountCircleIcon>
-        </div>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
