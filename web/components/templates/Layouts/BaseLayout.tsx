@@ -25,6 +25,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import Popover from "@mui/material/Popover";
 import Button from '@mui/material/Button';
 
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 
 const drawerWidth = 240;
 
@@ -97,7 +98,16 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const SubMenu = () => {};
+const MyComponent = styled("div")({
+  textDecoration: "none",
+  fontWeight: "bold",
+  color: "white",
+  fontSize: "22px",
+  ":hover": {
+    opacity: "0.7",
+    fontStyle: "italic",
+  },
+});
 
 export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
@@ -123,6 +133,20 @@ export default function BaseLayout({ children }: { children: any }) {
     setAnchorEl(null);
   };
 
+  const items = [
+    {
+      key: 'today',
+      component:  <AccessTimeIcon />
+    },
+    {
+      key: 'upcoming',
+      component:   <AssignmentIcon />
+    },
+    {
+      key: 'logs',
+      component:  <FormatAlignLeftIcon />
+    },
+  ]
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -143,15 +167,8 @@ export default function BaseLayout({ children }: { children: any }) {
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             <Link href={getRoutes("root")}>
-              <a
-                style={{
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                  color: "white",
-                  fontSize: "22px",
-                }}
-              >
-                Motive
+              <a>
+                <MyComponent>Motive</MyComponent>
               </a>
             </Link>
           </Typography>
@@ -160,22 +177,9 @@ export default function BaseLayout({ children }: { children: any }) {
             <AccountCircleIcon
               style={{ marginRight: "10px" }}
             ></AccountCircleIcon>
-            <Button
+            <AccountCircleIcon
               style={{ marginRight: "10px" }}
-              onClick={handleClick}
-            >open</Button>
-            <Popover
-
-              open={open}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-            >
-              <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-            </Popover>
+            ></AccountCircleIcon>
             <AccountCircleIcon></AccountCircleIcon>
           </div>
         </Toolbar>
@@ -192,14 +196,17 @@ export default function BaseLayout({ children }: { children: any }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["today", "upcoming"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index === 0 && <AccessTimeIcon />}
-                {index === 1 && <AssignmentIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+          {items.map((text, index) => (
+            <Link href={getRoutes(text.key)} key={text.key}>
+              <a style={{ textDecoration: "none", color: "black" }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    {text.component}
+                  </ListItemIcon>
+                  <ListItemText primary={text.key} />
+                </ListItem>
+              </a>
+            </Link>
           ))}
         </List>
         <Divider />
