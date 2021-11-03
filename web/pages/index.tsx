@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { getRoutes } from "./../lib/routes";
-import VerticalTabs from "@/components/templates/FilterYear/Tab";
 import BaseLayout from "@/components/templates/Layouts/BaseLayout";
 
 const Home: NextPage = () => {
@@ -32,7 +31,6 @@ const Home: NextPage = () => {
           </li>
         </ul>
       </div>
-      <VerticalTabs />
     </BaseLayout>
   );
 };
