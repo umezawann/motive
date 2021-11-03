@@ -1,4 +1,6 @@
 import * as React from "react";
+import Link from "next/link";
+import { getRoutes } from "./../../../lib/routes";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -18,6 +20,8 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 const drawerWidth = 240;
 
@@ -122,7 +126,18 @@ export default function BaseLayout({ children }: { children: any }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            <Link href={getRoutes("root")}>
+              <a
+                style={{
+                  textDecoration: "none",
+                  fontWeight: "bold",
+                  color: "white",
+                  fontSize: '22px',
+                }}
+              >
+                Motive
+              </a>
+            </Link>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <div style={{ height: "24px" }}>
@@ -148,26 +163,17 @@ export default function BaseLayout({ children }: { children: any }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          {["today", "upcoming"].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index === 0 && <AccessTimeIcon />}
+                {index === 1 && <AssignmentIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
