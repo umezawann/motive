@@ -94,6 +94,8 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+const SubMenu = () => {};
+
 export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -137,6 +139,16 @@ export default function BaseLayout({ children }: { children: any }) {
               </a>
             </Link>
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <div style={{ height: "24px" }}>
+            <AccountCircleIcon
+              style={{ marginRight: "10px" }}
+            ></AccountCircleIcon>
+            <AccountCircleIcon
+              style={{ marginRight: "10px" }}
+            ></AccountCircleIcon>
+            <AccountCircleIcon></AccountCircleIcon>
+          </div>
         </Toolbar>
         <div
           style={{
