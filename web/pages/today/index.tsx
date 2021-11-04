@@ -5,7 +5,8 @@ import TaskForm from '@/components/templates/TaskForm/TaskForm';
 import { useHooks } from './hooks';
 import BaseLayout from '@/components/templates/Layouts/BaseLayout';
 import Grid from '@mui/material/Grid';
-
+import Task from '@/components/templates/Task/Task';
+import Stack from '@mui/material/Stack';
 
 const Today: NextPage = () => {
   const { onSubmit, tasks, tasksInYear } = useHooks();
@@ -19,7 +20,14 @@ const Today: NextPage = () => {
           <div>
             <div style={{ margin: 'auto' }}>本日のタスク</div>
             <TaskForm onSubmit={onSubmit} />
-            {tasks && tasks.map((t) => <div key={t.id}>{t.title}</div>)}
+            <Stack spacing={2}>
+              {tasks &&
+                tasks.map((t) => (
+                  <div key={t.id}>
+                    <Task task={t} />
+                  </div>
+                ))}
+            </Stack>
           </div>
         </Grid>
         <Grid item xs={2} sm={2} />
