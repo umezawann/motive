@@ -10,6 +10,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import axios from 'axios';
 
 interface TaskProp {
   task: {
@@ -33,6 +34,8 @@ const Task = ({ task }: TaskProp) => {
     // hint: web/pages/today/hooks.ts のaxios.postらへん
     // endpoint: POST /tasks/:id
     console.log('handleSumbit', values);
+    const res = await axios.post('/tasks/:id', values);
+    console.log('res is', res);
   };
 
   return (
