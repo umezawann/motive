@@ -155,7 +155,6 @@ export default function BaseLayout({ children }: { children: any }) {
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
-          <div></div>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -204,7 +203,7 @@ export default function BaseLayout({ children }: { children: any }) {
                       style={{ fontSize: "3rem", margin: "7px" }}
                     />
                     <div style={{ display: "flex", flexDirection: "column" }}>
-                      <p
+                      <div
                         style={{
                           height: "21px",
                           margin: "8px 0 0",
@@ -212,8 +211,8 @@ export default function BaseLayout({ children }: { children: any }) {
                         }}
                       >
                         First name, Last name
-                      </p>
-                      <p
+                      </div>
+                      <div
                         style={{
                           height: "21px",
                           margin: "0 0 8px",
@@ -221,7 +220,7 @@ export default function BaseLayout({ children }: { children: any }) {
                         }}
                       >
                         e-mail address
-                      </p>
+                      </div>
                     </div>
                   </div>
                   <div
@@ -231,11 +230,11 @@ export default function BaseLayout({ children }: { children: any }) {
                       textAlign: "center",
                     }}
                   >
-                    <SettingsIcon
-                      style={{
-                        margin: "7px",
-                      }}
-                    />
+                    <div style={{
+                          padding: "7px",
+                        }}>
+                      <SettingsIcon />
+                    </div>
                     <div style={{ lineHeight: "38px" }}>Settings</div>
                   </div>
                 </Card>
