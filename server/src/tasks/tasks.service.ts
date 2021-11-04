@@ -59,11 +59,14 @@ export class TasksService {
     return task;
   }
 
-  update(id: string, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  async update(id: string, updateTaskDto: UpdateTaskDto) {
+    const {title} = updateTaskDto
+    // TODO: taskのtitleをupdateしたい
+    // 例: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#examples-8
+    return await prisma.task.update({ where: { id } }, {title: title});
   }
 
-  remove(id: string) {
+  async remove(id: string) {
     return `This action removes a #${id} task`;
   }
 }
