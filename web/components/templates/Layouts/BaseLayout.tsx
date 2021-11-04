@@ -17,13 +17,13 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import Popover from "@mui/material/Popover";
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 
@@ -112,10 +112,10 @@ const MyComponent = styled("div")({
 export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  
+
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-      null
-    );
+    null
+  );
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -133,48 +133,29 @@ export default function BaseLayout({ children }: { children: any }) {
     setAnchorEl(null);
   };
 
-  const hoge = Boolean(anchorEl);
-
+  const isOpen = Boolean(anchorEl);
 
   const items = [
     {
-      key: 'today',
-      component:  <AccessTimeIcon />
+      key: "today",
+      component: <AccessTimeIcon />,
     },
     {
-      key: 'upcoming',
-      component:   <AssignmentIcon />
+      key: "upcoming",
+      component: <AssignmentIcon />,
     },
     {
-      key: 'logs',
-      component:  <FormatAlignLeftIcon />
+      key: "logs",
+      component: <FormatAlignLeftIcon />,
     },
-  ]
+  ];
 
   return (
-    
     <Box sx={{ display: "flex" }}>
-
-
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
-       <div>
-      <Button variant="contained" onClick={handleClick}>
-        Open Popover
-      </Button>
-      <Popover
-        open={hoge}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-      </Popover>
-    </div>
+          <div></div>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -195,14 +176,71 @@ export default function BaseLayout({ children }: { children: any }) {
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <div style={{ height: "24px" }}>
-            <AccountCircleIcon
-              style={{ marginRight: "10px" }}
-            ></AccountCircleIcon>
-            <AccountCircleIcon
-              style={{ marginRight: "10px" }}
-            ></AccountCircleIcon>
-            <AccountCircleIcon></AccountCircleIcon>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <AccountCircleIcon style={{ margin: "8px" }}></AccountCircleIcon>
+            <AccountCircleIcon style={{ margin: "8px" }}></AccountCircleIcon>
+            <div>
+              <IconButton onClick={handleClick} color="inherit">
+                <AccountCircleIcon />
+              </IconButton>
+              <Popover
+                open={isOpen}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+                <Card sx={{ p: 2 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      textAlign: "center",
+                    }}
+                  >
+                    <AccountCircleIcon
+                      style={{ fontSize: "3rem", margin: "7px" }}
+                    />
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                      <p
+                        style={{
+                          height: "21px",
+                          margin: "8px 0 0",
+                          textAlign: "left",
+                        }}
+                      >
+                        First name, Last name
+                      </p>
+                      <p
+                        style={{
+                          height: "21px",
+                          margin: "0 0 8px",
+                          textAlign: "left",
+                        }}
+                      >
+                        e-mail address
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      textAlign: "center",
+                    }}
+                  >
+                    <SettingsIcon
+                      style={{
+                        margin: "7px",
+                      }}
+                    />
+                    <div style={{ lineHeight: "38px" }}>Settings</div>
+                  </div>
+                </Card>
+              </Popover>{" "}
+            </div>
           </div>
         </Toolbar>
       </AppBar>
@@ -222,9 +260,7 @@ export default function BaseLayout({ children }: { children: any }) {
             <Link href={getRoutes(text.key)} key={text.key}>
               <a style={{ textDecoration: "none", color: "black" }}>
                 <ListItem button>
-                  <ListItemIcon>
-                    {text.component}
-                  </ListItemIcon>
+                  <ListItemIcon>{text.component}</ListItemIcon>
                   <ListItemText primary={text.key} />
                 </ListItem>
               </a>
