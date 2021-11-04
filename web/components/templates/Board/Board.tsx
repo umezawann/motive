@@ -19,7 +19,7 @@ const Board = () => {
 
   return (
     <Draggable
-      axis="x"
+      axis="both"
       handle=".handle"
       defaultPosition={{ x: 0, y: 0 }}
       // position={null}
@@ -29,8 +29,8 @@ const Board = () => {
       onDrag={handleDrag}
       onStop={handleStop}
     >
-      <div>
-        <div className="handle">Drag from here</div>
+      <div className="handle" style={{border: '1px solid #ccc', width: 300, height: 300}}>
+        <div >Drag from here</div>
         <div>This readme is really dragging on...</div>
       </div>
     </Draggable>
