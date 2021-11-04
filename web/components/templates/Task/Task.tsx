@@ -14,6 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 interface TaskProp {
   task: {
     id: string;
+    title: string;
   };
 }
 
@@ -27,6 +28,9 @@ const Task = ({ task }: TaskProp) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleSumbit = (values) => {
+    console.log('handleSumbit', values);
+  };
 
   return (
     <>
@@ -35,7 +39,12 @@ const Task = ({ task }: TaskProp) => {
           <div>{JSON.stringify(task)}</div>
         </CardContent>
       </Card>
-      <FormDialog open={open} handleClose={handleClose} task={task} />
+      <FormDialog
+        open={open}
+        handleClose={handleClose}
+        task={task}
+        handleSubmit={handleSumbit}
+      />
     </>
   );
 };
@@ -43,12 +52,16 @@ const Task = ({ task }: TaskProp) => {
 interface FormDialogProp {
   open: boolean;
   handleClose: () => void;
+  handleSubmit: (values: any) => Promise<void>;
   task: {
     id: string;
+    title: string;
   };
 }
 
-function FormDialog({ open, handleClose, task }: FormDialogProp) {
+function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
+  const [title, setTitle] = React.useState(task.title);
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Subscribe</DialogTitle>
@@ -57,16 +70,17 @@ function FormDialog({ open, handleClose, task }: FormDialogProp) {
         <TextField
           autoFocus
           margin="dense"
-          id="name"
-          label="Email Address"
+          id="title"
+          label="Title"
           type="email"
           fullWidth
           variant="standard"
+          onChange={(event) => setTitle(event.target.value)}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleClose}>Subscribe</Button>
+        <Button onClick={() => handleSubmit({ title: title })}>Save</Button>
       </DialogActions>
     </Dialog>
   );
