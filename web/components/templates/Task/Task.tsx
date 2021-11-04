@@ -28,7 +28,10 @@ const Task = ({ task }: TaskProp) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSumbit = (values) => {
+  const handleSumbit = async (values: any) => {
+    // TODO: API側にpostリクエストを送る
+    // hint: web/pages/today/hooks.ts のaxios.postらへん
+    // endpoint: POST /tasks/:id
     console.log('handleSumbit', values);
   };
 
@@ -64,7 +67,7 @@ function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Subscribe</DialogTitle>
+      <DialogTitle>Edit</DialogTitle>
       <DialogContent>
         <DialogContentText>{task.id}</DialogContentText>
         <TextField
