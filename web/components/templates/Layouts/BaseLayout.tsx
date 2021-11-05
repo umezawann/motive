@@ -109,6 +109,18 @@ const MyComponent = styled("div")({
   },
 });
 
+const Profile = styled("div")({
+  height: "21px",
+  margin: "8px 0 0",
+  textAlign: "left",
+});
+
+const Settings = styled("div")({
+  height: "21px",
+  margin: "0 0 8px",
+  textAlign: "left",
+});
+
 export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -175,11 +187,23 @@ export default function BaseLayout({ children }: { children: any }) {
             </Link>
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <AccountCircleIcon style={{ margin: "8px" }}></AccountCircleIcon>
-            <AccountCircleIcon style={{ margin: "8px" }}></AccountCircleIcon>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: "110px",
+              padding: "auto",
+            }}
+          >
+            <AccountCircleIcon></AccountCircleIcon>
+            <AccountCircleIcon></AccountCircleIcon>
             <div>
-              <IconButton onClick={handleClick} color="inherit">
+              <IconButton
+                onClick={handleClick}
+                color="inherit"
+                style={{ padding: "0px" }}
+              >
                 <AccountCircleIcon />
               </IconButton>
               <Popover
@@ -203,24 +227,8 @@ export default function BaseLayout({ children }: { children: any }) {
                       style={{ fontSize: "3rem", margin: "7px" }}
                     />
                     <div style={{ display: "flex", flexDirection: "column" }}>
-                      <div
-                        style={{
-                          height: "21px",
-                          margin: "8px 0 0",
-                          textAlign: "left",
-                        }}
-                      >
-                        First name, Last name
-                      </div>
-                      <div
-                        style={{
-                          height: "21px",
-                          margin: "0 0 8px",
-                          textAlign: "left",
-                        }}
-                      >
-                        e-mail address
-                      </div>
+                      <Profile>First name, Last name</Profile>
+                      <Settings>e-mail address</Settings>
                     </div>
                   </div>
                   <div
@@ -230,9 +238,11 @@ export default function BaseLayout({ children }: { children: any }) {
                       textAlign: "center",
                     }}
                   >
-                    <div style={{
-                          padding: "7px",
-                        }}>
+                    <div
+                      style={{
+                        padding: "7px",
+                      }}
+                    >
                       <SettingsIcon />
                     </div>
                     <div style={{ lineHeight: "38px" }}>Settings</div>
