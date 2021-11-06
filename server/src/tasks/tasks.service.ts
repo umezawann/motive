@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { prisma } from '@/prisma';
+import * as dayjs from 'dayjs'
+// import 'dayjs/locale/es'
 
 @Injectable()
 export class TasksService {
@@ -20,8 +22,14 @@ export class TasksService {
   }
 
   async findToday() {
+    // TODO: dayjsを使ってコードを書き換える
+    // https://day.js.org/docs/en/installation/typescript
+    const hoge = dayjs().toDate()
+    // dayjs().add()
+    console.log('hoge is', hoge)
     const today = new Date();
-    const tomorrow = new Date();
+    const tomorrow = new Date(); // hint: dayjs().add(7, 'day'), ref: https://day.js.org/docs/en/manipulate/add#docsNav
+
     tomorrow.setDate(today.getDate() + 1);
 
     const dates = [today, tomorrow].map((date) => {
