@@ -25,7 +25,9 @@ export class TasksService {
     tomorrow.setDate(today.getDate() + 1);
 
     const dates = [today, tomorrow].map((date) => {
-      const d = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      const d = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
       return d;
     });
 
@@ -60,10 +62,11 @@ export class TasksService {
   }
 
   async update(id: string, updateTaskDto: UpdateTaskDto) {
-    const {title} = updateTaskDto
+    const { title } = updateTaskDto;
     // TODO: taskのtitleをupdateしたい
     // 例: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#examples-8
-    return await prisma.task.update({ where: { id } }, {title: title});
+    return null
+    // return await prisma.task.update({ where: { id } }, { title: title });
   }
 
   async remove(id: string) {
