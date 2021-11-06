@@ -31,7 +31,6 @@ export class TasksController {
 
   @Post(':id')
   async update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-    // TODO: ここにアクセスがくるはず
     console.log('tasks update', id, updateTaskDto)
     return this.tasksService.update(id, updateTaskDto);
   }

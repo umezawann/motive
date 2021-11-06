@@ -1,16 +1,16 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import axios from 'axios';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import axios from "axios";
 
 interface TaskProp {
   task: {
@@ -29,13 +29,13 @@ const Task = ({ task }: TaskProp) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const handleSumbit = async (values: any) => {
-    // TODO: API側にpostリクエストを送る
+
+  const handleSumbit = async (id: string, values: any) => {
+    console.log("handleSumbit id", id);
     // hint: web/pages/today/hooks.ts のaxios.postらへん
-    // endpoint: POST /tasks/:id
-    console.log('handleSumbit', values);
-    const res = await axios.post('/tasks/:id', values);
-    console.log('res is', res);
+    const body = { ...values };
+    const res = await axios.post(`/tasks/${id}`, body);
+    console.log("res is", res);
   };
 
   return (
@@ -58,7 +58,7 @@ const Task = ({ task }: TaskProp) => {
 interface FormDialogProp {
   open: boolean;
   handleClose: () => void;
-  handleSubmit: (values: any) => Promise<void>;
+  handleSubmit: (id: string, values: any) => Promise<void>;
   task: {
     id: string;
     title: string;
@@ -67,6 +67,7 @@ interface FormDialogProp {
 
 function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
   const [title, setTitle] = React.useState(task.title);
+  console.log("FormDialog task is", task);
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -86,7 +87,9 @@ function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={() => handleSubmit({ title: title })}>Save</Button>
+        <Button onClick={() => handleSubmit(task.id, { title: title })}>
+          Save
+        </Button>
       </DialogActions>
     </Dialog>
   );
