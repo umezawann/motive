@@ -11,11 +11,17 @@ export class AuthService {
 
   async validateUser(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(username);
+    // TODO: passwordのencryption & decryptionを行う
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
     }
     return null;
+  }
+
+  async signup(user: any) {
+    // TODO: signup機能を実装する
+    return null
   }
 
   async login(user: any) {
