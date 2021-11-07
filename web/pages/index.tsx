@@ -5,6 +5,8 @@ import { getRoutes } from "./../lib/routes";
 import BaseLayout from "@/components/templates/Layouts/BaseLayout";
 
 const Home: NextPage = () => {
+  // TODO: リンクを出すコードを短く書きたい https://github.com/keisukee/motive/issues/33
+  // ex) const links = [{ title: 'hogehoge', path: '/root' }, ...]
   return (
     <BaseLayout>
       <Head>
@@ -27,6 +29,11 @@ const Home: NextPage = () => {
           <li>
             <Link href={getRoutes("settings")}>
               <a>settings</a>
+            </Link>
+          </li>
+          <li>
+            <Link href={getRoutes("board")}>
+              <a>board</a>
             </Link>
           </li>
         </ul>

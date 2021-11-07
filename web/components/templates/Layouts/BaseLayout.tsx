@@ -24,7 +24,7 @@ import Popover from "@mui/material/Popover";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import SettingsIcon from "@mui/icons-material/Settings";
-
+import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard';
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 
 const drawerWidth = 240;
@@ -159,6 +159,10 @@ export default function BaseLayout({ children }: { children: any }) {
     {
       key: "logs",
       component: <FormatAlignLeftIcon />,
+    },
+    {
+      key: "board",
+      component: <DeveloperBoardIcon />,
     },
   ];
 
