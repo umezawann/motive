@@ -7,7 +7,10 @@ const Board = () => {
   return (
     <div>
       <DndProvider backend={HTML5Backend}>
+        <div style={{display: 'flex'}}>
         <Container />
+        <Container />
+        </div>
       </DndProvider>
     </div>
   );
