@@ -2,11 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { prisma } from '@/prisma';
+import * as dayjs from 'dayjs'
+// import 'dayjs/locale/es'
 
 @Injectable()
 export class TasksService {
   async create(createTaskDto: CreateTaskDto) {
-    console.log('tasks.service')
     console.log('createTaskDto', createTaskDto);
 
     const task = await prisma.task.create({ data: createTaskDto });
@@ -21,24 +22,41 @@ export class TasksService {
   }
 
   async findToday() {
+    // TODO: dayjsを使ってコードを書き換える
+    // https://day.js.org/docs/en/installation/typescript
+    const hoge = dayjs().toDate()
+    // dayjs().add()
+    console.log('hoge is', hoge)
+    const today = new Date();
+    const tomorrow = new Date(); // hint: dayjs().add(7, 'day'), ref: https://day.js.org/docs/en/manipulate/add#docsNav
+
+    tomorrow.setDate(today.getDate() + 1);
+
+    const dates = [today, tomorrow].map((date) => {
+      const d = `${date.getFullYear()}-${
+        date.getMonth() + 1
+      }-${date.getDate()}`;
+      return d;
+    });
+
+    const start = new Date(`${dates[0]} 00:00`);
+    const deadline = new Date(`${dates[1]} 00:00`);
+    console.log('start is', start);
+    console.log('deadline is', deadline);
+
     const tasks = await prisma.task.findMany({
       where: {
         AND: [
           {
             date: {
-              gte: new Date(
-                '2021-10-25T00:00:00+0900',
-              )
+              gte: new Date(start),
             },
           },
           {
             date: {
-              lte: new Date(
-                '2021-10-26T00:00:00+0900',
-              )
+              lt: new Date(deadline),
             },
           },
-
         ],
       },
     });
@@ -51,11 +69,16 @@ export class TasksService {
     return task;
   }
 
-  update(id: string, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  async update(id: string, updateTaskDto: UpdateTaskDto) {
+    console.log('hello');
+    const { title } = updateTaskDto;
+    return await prisma.task.update({
+      where: { id: id },
+      data: { title: title },
+    });
   }
 
-  remove(id: string) {
+  async remove(id: string) {
     return `This action removes a #${id} task`;
   }
 }

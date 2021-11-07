@@ -29,8 +29,9 @@ export class TasksController {
     return this.tasksService.findOne(id);
   }
 
-  @Patch(':id')
+  @Post(':id')
   async update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+    console.log('tasks update', id, updateTaskDto)
     return this.tasksService.update(id, updateTaskDto);
   }
 

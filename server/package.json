@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "0.0.1",
-  "description": "",
+  "description": "[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.",
   "author": "",
   "private": true,
   "license": "UNLICENSED",
@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/swagger": "^5.1.4",
     "@prisma/client": "^3.3.0",
+    "dayjs": "^1.10.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
@@ -75,5 +76,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
   }
 }

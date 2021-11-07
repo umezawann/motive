@@ -1,8 +1,8 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Link from 'next/link';
-import { getRoutes } from './../lib/routes';
-import BaseLayout from '@/components/templates/Layouts/BaseLayout';
+import type { NextPage } from "next";
+import Head from "next/head";
+import Link from "next/link";
+import { getRoutes } from "./../lib/routes";
+import BaseLayout from "@/components/templates/Layouts/BaseLayout";
 
 const Home: NextPage = () => {
   return (
@@ -15,22 +15,17 @@ const Home: NextPage = () => {
       <div>
         <ul>
           <li>
-            <Link href={getRoutes('root')}>
+            <Link href={getRoutes("root")}>
               <a>Home</a>
             </Link>
           </li>
           <li>
-            <Link href={getRoutes('today')}>
+            <Link href={getRoutes("today")}>
               <a>today's tasks</a>
             </Link>
           </li>
           <li>
-            <Link href={getRoutes('logs')}>
-              <a>logs</a>
-            </Link>
-          </li>
-          <li>
-            <Link href={getRoutes('settings')}>
+            <Link href={getRoutes("settings")}>
               <a>settings</a>
             </Link>
           </li>
