@@ -8,19 +8,6 @@ export type User = any;
 
 @Injectable()
 export class UsersService {
-  private readonly users = [
-    {
-      userId: 1,
-      email: 'test@example.com',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      email: 'test2@example.com',
-      password: 'guess',
-    },
-  ];
-
   async findOne(email: string): Promise<User | undefined> {
     const user = await prisma.user.findUnique({ where: { email } });
 
