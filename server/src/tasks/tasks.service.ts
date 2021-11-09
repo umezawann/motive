@@ -22,9 +22,9 @@ export class TasksService {
   }
 
   async findToday() {
-    const today =dayjs().format('YYYY-M-D 00:00');
+    const today =dayjs().startOf('year');
     console.log('today is',today)
-    const tomorrow = dayjs().add(1, 'day').format('YYYY-M-D 00:00'); 
+    const tomorrow = dayjs().add(1, 'day').startOf('year'); 
     console.log('tomorrow is', tomorrow);
 
     const tasks = await prisma.task.findMany({
@@ -32,12 +32,12 @@ export class TasksService {
         AND: [
           {
             date: {
-              gte: new Date(today),
+              gte: today.toDate(),
             },
           },
           {
             date: {
-              lt: new Date(tomorrow),
+              lt: tomorrow.toDate(),
             },
           },
         ],
