@@ -5,6 +5,12 @@ import { getRoutes } from "./../lib/routes";
 import BaseLayout from "@/components/templates/Layouts/BaseLayout";
 
 const Home: NextPage = () => {
+  const links = [
+    { title: "Home", path: "root" },
+    { title: "today's tasks", path: "today" },
+    { title: "settings", path: "settings" },
+  ];
+
   return (
     <BaseLayout>
       <Head>
@@ -14,12 +20,15 @@ const Home: NextPage = () => {
       </Head>
       <div>
         <ul>
-          <li>
-            <Link href={getRoutes("root")}>
-              <a>Home</a>
-            </Link>
-          </li>
-          <li>
+          {links.map((link, idx) => (
+            <li key={idx}>
+              <Link href={getRoutes(link.path)}>
+                <a>{link.title}</a>
+              </Link>
+            </li>
+          ))}
+
+          {/* <li>
             <Link href={getRoutes("today")}>
               <a>today's tasks</a>
             </Link>
@@ -28,7 +37,7 @@ const Home: NextPage = () => {
             <Link href={getRoutes("settings")}>
               <a>settings</a>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
     </BaseLayout>
