@@ -4,7 +4,7 @@ export const useApiClient = ({
   method,
   url,
 }: {
-  method: 'GET' | 'POST' | 'DELETE';
+  method: 'GET'
   url: string;
 }) => {
   const { response, loading, error } = useAxios({
