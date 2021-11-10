@@ -4,11 +4,10 @@ import { Form, Field } from 'react-final-form';
 import Button, { ButtonProps } from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Link from 'next/link';
+import { useHooks } from './hooks';
 
 const Login: NextPage = () => {
-  const onSubmit = (values) => {
-    console.log('hogehoge', values);
-  };
+  const { onSubmit } = useHooks();
 
   return (
     <AuthLayout>
@@ -58,7 +57,6 @@ const Login: NextPage = () => {
                   Submit
                 </Button>
               </div>
-
             </form>
           )}
         />

@@ -1,14 +1,14 @@
+
 import type { NextPage } from 'next';
 import AuthLayout from '@/components/templates/Layouts/AuthLayout';
 import { Form, Field } from 'react-final-form';
 import Button, { ButtonProps } from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Link from 'next/link';
+import { useHooks } from './hooks';
 
 const Signup: NextPage = () => {
-  const onSubmit = (values) => {
-    console.log('hogehoge', values);
-  };
+  const { onSubmit } = useHooks();
 
   return (
     <AuthLayout>
