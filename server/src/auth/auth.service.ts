@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { prisma } from '@/prisma';
@@ -33,11 +33,9 @@ export class AuthService {
     const access_token = this.jwtService.sign(payload);
 
     if (existedUser) {
-      return { access_token };
+      throw new UnauthorizedException();
     }
 
-    // console.log('signup here');
-    // console.log('user is', user);
     // TODO: encrypto/decrypto
     await prisma.user.create({
       data: {
