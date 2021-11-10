@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { prisma } from '@/prisma';
-import * as dayjs from 'dayjs'
+import * as dayjs from 'dayjs';
 // import 'dayjs/locale/es'
 
 @Injectable()
@@ -22,9 +22,9 @@ export class TasksService {
   }
 
   async findToday() {
-    const today =dayjs().startOf('year');
-    console.log('today is',today)
-    const tomorrow = dayjs().add(1, 'day').startOf('year'); 
+    const today = dayjs().startOf('day');
+    console.log('today is', today);
+    const tomorrow = dayjs().add(1, 'day').startOf('day');
     console.log('tomorrow is', tomorrow);
 
     const tasks = await prisma.task.findMany({
