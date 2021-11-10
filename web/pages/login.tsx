@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import BaseLayout from "@/components/templates/Layouts/BaseLayout";
+import AuthLayout from "@/components/templates/Layouts/AuthLayout";
 
 const Login: NextPage = () => {
   return (
-    <BaseLayout>
+    <AuthLayout>
     <div>login</div>
-    </BaseLayout>
+    </AuthLayout>
   );
 };
 
