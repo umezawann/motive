@@ -14,7 +14,7 @@ export const useAxios = (axiosParams: AxiosRequestConfig) => {
   const [response, setResponse] = useState<any | undefined>(undefined);
   const [error, setError] = useState<any>('');
   const [loading, setLoading] = useState(true);
-  const token = get('accessToken');
+  const token = getFromStorage('accessToken');
 
   useEffect(() => {
     const func = async () => {
@@ -39,26 +39,19 @@ export const useAxios = (axiosParams: AxiosRequestConfig) => {
   return { response, error, loading };
 };
 
-function get(path: string) {
+async function post(path: string, body: any) {
   const token = getFromStorage('accessToken');
 
-  axios.get(path, { headers: { Authorization: `Bearer ${token}` } });
+  return await axios.post(path, body, { headers: { Authorization: `Bearer ${token}` } });
 }
 
-function post(path: string, body: any) {
+async function _delete(path: string) {
   const token = getFromStorage('accessToken');
 
-  axios.post(path, body, { headers: { Authorization: `Bearer ${token}` } });
-}
-
-function _delete(path: string) {
-  const token = getFromStorage('accessToken');
-
-  axios.delete(path, { headers: { Authorization: `Bearer ${token}` } });
+  return await axios.delete(path, { headers: { Authorization: `Bearer ${token}` } });
 }
 
 export const apiClient = {
-  get,
   post,
   delete: _delete,
 };

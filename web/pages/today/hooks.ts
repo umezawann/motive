@@ -1,6 +1,5 @@
-import axios from '@/lib/axios';
 import { useTasksOfDay, useTasksInYear } from '@/lib/api/tasks';
-import {useApiClient} from '@/lib/api/apiClient'
+import { apiClient } from '@/lib/axios'
 
 export const useHooks = () => {
   const { data } = useTasksOfDay();
@@ -9,7 +8,7 @@ export const useHooks = () => {
     console.log('values', values);
     const body = { ...values, point: 1, status: 'TODO', date: new Date() };
     console.log('body is', body);
-    const res = await axios.post('/tasks', body);
+    const res = await apiClient.post('/tasks', body);
     console.log('res is', res);
   };
 
