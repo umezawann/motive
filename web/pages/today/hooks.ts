@@ -1,5 +1,6 @@
 import axios from '@/lib/axios';
 import { useTasksOfDay, useTasksInYear } from '@/lib/api/tasks';
+import {useApiClient} from '@/lib/api/apiClient'
 
 export const useHooks = () => {
   const { data } = useTasksOfDay();

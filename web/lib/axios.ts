@@ -14,15 +14,13 @@ export const useAxios = (axiosParams: any) => {
   const [response, setResponse] = useState<any | undefined>(undefined);
   const [error, setError] = useState<any>('');
   const [loading, setLoading] = useState(true);
-  // const token = get('accessToken')
+  const token = get('accessToken')
   // console.log('token is', token)
   const fetchData = async (params: any) => {
     try {
-      const result = await axios.request(params);
-
-      // const result = await axios.request({...params, headers: {
-      //   Authorization: `token ${token}`
-      // }});
+      const result = await axios.request({...params, headers: {
+        Authorization: `Bearer ${token}`
+      }});
       setResponse(result.data);
     } catch (error) {
       setError(error);
