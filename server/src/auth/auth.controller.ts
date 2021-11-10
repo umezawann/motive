@@ -13,16 +13,15 @@ import { CreateUserDto } from '../users/dto/create-user.dto';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @UseGuards(LocalAuthGuard)
-  @Post('login')
-  async login(@Request() req) {
-    return this.authService.login(req.user);
-  }
-
-  @UseGuards(LocalAuthGuard)
   @Post('signup')
   async signup(@Request() req, @Body() body: CreateUserDto) {
     console.log('body is', body);
     return this.authService.signup(body);
+  }
+
+  @UseGuards(LocalAuthGuard)
+  @Post('login')
+  async login(@Request() req) {
+    return this.authService.login(req.user);
   }
 }
