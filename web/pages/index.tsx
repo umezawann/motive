@@ -27,17 +27,6 @@ const Home: NextPage = () => {
               </Link>
             </li>
           ))}
-
-          {/* <li>
-            <Link href={getRoutes("today")}>
-              <a>today's tasks</a>
-            </Link>
-          </li>
-          <li>
-            <Link href={getRoutes("settings")}>
-              <a>settings</a>
-            </Link>
-          </li> */}
         </ul>
       </div>
     </BaseLayout>
