@@ -1,5 +1,6 @@
-import axios from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import { useState, useEffect } from 'react';
+import { get as getFromStorage } from '@/lib/storage';
 
 const instance = axios.create({
   baseURL: 'http://localhost:3001',
@@ -8,28 +9,51 @@ const instance = axios.create({
 });
 
 // ref: https://dev.to/ms_yogii/useaxios-a-simple-custom-hook-for-calling-apis-using-axios-2dkj
-axios.defaults.baseURL = 'http://localhost:3001'
-export const useAxios = (axiosParams: any) => {
+axios.defaults.baseURL = 'http://localhost:3001';
+export const useAxios = (axiosParams: AxiosRequestConfig) => {
   const [response, setResponse] = useState<any | undefined>(undefined);
   const [error, setError] = useState<any>('');
   const [loading, setLoading] = useState(true);
-
-  const fetchData = async (params: any) => {
-    try {
-      const result = await axios.request(params);
-      setResponse(result.data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const token = getFromStorage('accessToken');
 
   useEffect(() => {
-    fetchData(axiosParams);
+    const func = async () => {
+      try {
+        const result = await axios.request({
+          ...axiosParams,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setResponse(result.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    func()
   }, []); // execute once only
 
   return { response, error, loading };
+};
+
+async function post(path: string, body: any) {
+  const token = getFromStorage('accessToken');
+
+  return await axios.post(path, body, { headers: { Authorization: `Bearer ${token}` } });
+}
+
+async function _delete(path: string) {
+  const token = getFromStorage('accessToken');
+
+  return await axios.delete(path, { headers: { Authorization: `Bearer ${token}` } });
+}
+
+export const apiClient = {
+  post,
+  delete: _delete,
 };
 
 export default instance;
