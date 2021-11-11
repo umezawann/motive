@@ -15,7 +15,8 @@ import { apiClient } from '@/lib/axios'
 interface TaskProp {
   task: {
     id: string;
-    title: string;
+    title: any;
+    point: string;
   };
 }
 
@@ -30,10 +31,11 @@ const Task = ({ task }: TaskProp) => {
     setOpen(false);
   };
 
-  const handleSumbit = async (id: string, values: any) => {
+  const handleSumbit = async (id: string, title: any, point: string) => {
     console.log("handleSumbit id", id);
     // hint: web/pages/today/hooks.ts のaxios.postらへん
-    const body = { ...values };
+    const body = [{ ...title}, { ...point}];
+    console.log('body is',body)
     const res = await apiClient.post(`/tasks/${id}`, body)
     console.log("res is", res);
   };
@@ -58,15 +60,17 @@ const Task = ({ task }: TaskProp) => {
 interface FormDialogProp {
   open: boolean;
   handleClose: () => void;
-  handleSubmit: (id: string, values: any) => Promise<void>;
+  handleSubmit: (id: string, title: any, point: string,) => Promise<void>;
   task: {
     id: string;
-    title: string;
+    title: any;
+    point: string;
   };
 }
 
 function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
   const [title, setTitle] = React.useState(task.title);
+  const [point, setPoint] = React.useState(task.point);
   console.log("FormDialog task is", task);
 
   return (
@@ -83,11 +87,23 @@ function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
           fullWidth
           variant="standard"
           onChange={(event) => setTitle(event.target.value)}
-        />
+          value={title}
+        ></TextField>
+        <TextField
+          
+          margin="dense"
+          id="point"
+          label="Point"
+          type="email"
+          fullWidth
+          variant="standard"
+          onChange={(event) => setPoint(event.target.value)}
+          value={point}
+        ></TextField>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={() => handleSubmit(task.id, { title: title })}>
+        <Button onClick={() => handleSubmit(task.id, { title: title }, { point: point },)}>
           Save
         </Button>
       </DialogActions>
