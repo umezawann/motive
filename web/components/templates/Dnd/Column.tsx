@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 import * as color from './color'
 import { Card } from './Card'
 // import { PlusIcon } from './icon'
@@ -44,13 +44,13 @@ export function Column({
   }
 
   return (
-    <Container>
-      <Header>
-        <CountBadge>{totalCount}</CountBadge>
-        <ColumnName>{title}</ColumnName>
+    // <Container>
+    //   <Header>
+    //     <CountBadge>{totalCount}</CountBadge>
+    //     <ColumnName>{title}</ColumnName>
 
         {/* <AddButton onClick={toggleInput} /> */}
-      </Header>
+      {/* </Header> */}
 {/* 
       {inputMode && (
         <InputForm
@@ -60,10 +60,10 @@ export function Column({
           onCancel={cancelInput}
         />
       )} */}
-
+{/* 
       {filterValue && <ResultCount>{cards.length} results</ResultCount>}
 
-      <VerticalScroll>
+      <VerticalScroll> */}
         {cards.map(({ id, text }, i) => (
           <Card.DropArea
             key={id}
@@ -89,77 +89,77 @@ export function Column({
           }
           onDrop={() => onCardDrop?.(null)}
         />
-      </VerticalScroll>
-    </Container>
+      {/* </VerticalScroll>
+    </Container> */}
   )
-}
+// }
 
-const Container = styled.div`
-  display: flex;
-  flex-flow: column;
-  width: 355px;
-  height: 100%;
-  border: solid 1px ${color.Silver};
-  border-radius: 6px;
-  background-color: ${color.LightSilver};
+// const Container = styled.div`
+//   display: flex;
+//   flex-flow: column;
+//   width: 355px;
+//   height: 100%;
+//   border: solid 1px ${color.Silver};
+//   border-radius: 6px;
+//   background-color: ${color.LightSilver};
 
-  > :not(:last-child) {
-    flex-shrink: 0;
-  }
-`
+//   > :not(:last-child) {
+//     flex-shrink: 0;
+//   }
+// `
 
-const Header = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 8px;
-`
-
-const CountBadge = styled.div`
-  margin-right: 8px;
-  border-radius: 20px;
-  padding: 2px 6px;
-  color: ${color.Black};
-  background-color: ${color.Silver};
-  font-size: 12px;
-  line-height: 1;
-`
-
-const ColumnName = styled.div`
-  color: ${color.Black};
-  font-size: 14px;
-  font-weight: bold;
-`
-
-const AddButton = styled.button.attrs({
-  type: 'button',
-//   children: <PlusIcon />,
-})`
-  margin-left: auto;
-  color: ${color.Black};
-
-  :hover {
-    color: ${color.Blue};
-  }
-`
-
-// const InputForm = styled(_InputForm)`
+// const Header = styled.div`
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
 //   padding: 8px;
 // `
 
-const ResultCount = styled.div`
-  color: ${color.Black};
-  font-size: 12px;
-  text-align: center;
-`
+// const CountBadge = styled.div`
+//   margin-right: 8px;
+//   border-radius: 20px;
+//   padding: 2px 6px;
+//   color: ${color.Black};
+//   background-color: ${color.Silver};
+//   font-size: 12px;
+//   line-height: 1;
+// `
 
-const VerticalScroll = styled.div`
-  height: 100%;
-  padding: 8px;
-  overflow-y: auto;
-  flex: 1 1 auto;
+// const ColumnName = styled.div`
+//   color: ${color.Black};
+//   font-size: 14px;
+//   font-weight: bold;
+// `
 
-  > :not(:first-child) {
-    margin-top: 8px;
-  }
-`
+// const AddButton = styled.button.attrs({
+//   type: 'button',
+// //   children: <PlusIcon />,
+// })`
+//   margin-left: auto;
+//   color: ${color.Black};
+
+//   :hover {
+//     color: ${color.Blue};
+//   }
+// `
+
+// // const InputForm = styled(_InputForm)`
+// //   padding: 8px;
+// // `
+
+// const ResultCount = styled.div`
+//   color: ${color.Black};
+//   font-size: 12px;
+//   text-align: center;
+// `
+
+// const VerticalScroll = styled.div`
+//   height: 100%;
+//   padding: 8px;
+//   overflow-y: auto;
+//   flex: 1 1 auto;
+
+//   > :not(:first-child) {
+//     margin-top: 8px;
+//   }
+// `

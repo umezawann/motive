@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 import * as color from './color'
 // import { CheckIcon as _CheckIcon, TrashIcon } from './icon'
+import {styled} from "@mui/material/styles";
 
 Card.DropArea = DropArea
 
@@ -40,7 +41,7 @@ export function Card({
         ),
       )}
 
-      <DeleteButton />
+      {/* <DeleteButton /> */}
     </Container>
   )
 }
@@ -64,27 +65,28 @@ const Container = styled.div.attrs({
 //   color: ${color.Green};
 // `
 
-const DeleteButton = styled.button.attrs({
-  type: 'button',
-//   children: <TrashIcon />,
-})`
-  position: absolute;
-  top: 12px;
-  right: 8px;
-  font-size: 14px;
-  color: ${color.Gray};
+// const DeleteButton = styled.button.attrs({
+//   type: 'button',
+// //   children: <TrashIcon />,
+// })`
+//   position: absolute;
+//   top: 12px;
+//   right: 8px;
+//   font-size: 14px;
+//   color: ${color.Gray};
 
-  :hover {
-    color: ${color.Red};
-  }
-`
+//   :hover {
+//     color: ${color.Red};
+//   }
+// `
 
-const Text = styled.span`
-  color: ${color.Black};
-  font-size: 14px;
-  line-height: 1.7;
-  white-space: pre-wrap;
-`
+const Text = styled('span')({
+
+  color: `${color.Black}`,
+  fontSize: '14px',
+  lineHeight: '1.7',
+  whiteSpace: 'pre-wrap',
+})
 
 const Link = styled.a.attrs({
   target: '_blank',
@@ -177,15 +179,16 @@ function useDragAutoLeave(timeout: number = 100) {
   ] as const
 }
 
-const DropAreaContainer = styled.div`
-  > :not(:first-child) {
-    margin-top: 8px;
-  }
-`
+const DropAreaContainer = styled('div')({
 
-const DropAreaIndicator = styled.div`
-  height: 40px;
-  border: dashed 3px ${color.Gray};
-  border-radius: 6px;
-  transition: all 50ms ease-out;
-`
+  // > :not(:first-child) {
+  //   margin-top: '8px',
+  // }
+})
+
+const DropAreaIndicator = styled('div')({
+  height: '40px',
+  border:`dashed 3px ${color.Gray}`,
+  borderRadius:' 6px',
+  transition:' all 50ms ease-out',
+})

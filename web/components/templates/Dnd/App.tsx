@@ -1,42 +1,42 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 // import produce from 'immer'
 // import { Header as _Header } from './Header'
 import { Column } from './Column'
 
 export function App() {
 
-const Container = styled.div`
-display: flex;
-flex-flow: column;
-height: 100%;
-`
+// const Container = styled.div`
+// display: flex;
+// flex-flow: column;
+// height: 100%;
+// `
 
 
 
-const MainArea = styled.div`
-height: 100%;
-padding: 16px 0;
-overflow-y: auto;
-`
+// const MainArea = styled.div`
+// height: 100%;
+// padding: 16px 0;
+// overflow-y: auto;
+// `
 
-const HorizontalScroll = styled.div`
-display: flex;
-width: 100%;
-height: 100%;
-overflow-x: auto;
+// const HorizontalScroll = styled.div`
+// display: flex;
+// width: 100%;
+// height: 100%;
+// overflow-x: auto;
 
-> * {
-  margin-left: 16px;
-  flex-shrink: 0;
-}
+// > * {
+//   margin-left: 16px;
+//   flex-shrink: 0;
+// }
 
-::after {
-  display: block;
-  flex: 0 0 16px;
-  content: '';
-}
-`
+// ::after {
+//   display: block;
+//   flex: 0 0 16px;
+//   content: '';
+// }
+// `
 
   const [filterValue, setFilterValue] = useState('')
   const [columns, setColumns] = useState([
@@ -119,11 +119,11 @@ overflow-x: auto;
   }
 
   return (
-    <Container>
-      {/* <Header filterValue={filterValue} onFilterChange={setFilterValue} /> */}
+    // <Container>
+    //   {/* <Header filterValue={filterValue} onFilterChange={setFilterValue} /> */}
 
-      <MainArea>
-        <HorizontalScroll>
+    //   <MainArea>
+    //     <HorizontalScroll>
           {columns.map(({ id: columnID, title, cards }) => (
             <Column
               key={columnID}
@@ -134,8 +134,8 @@ overflow-x: auto;
               onCardDrop={entered => dropCardTo(entered ?? columnID)}
             />
           ))}
-        </HorizontalScroll>
-      </MainArea>
-    </Container>
+  //       </HorizontalScroll>
+  //     </MainArea>
+  //   </Container>
   )
 }
