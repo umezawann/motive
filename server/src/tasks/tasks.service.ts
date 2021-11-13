@@ -42,6 +42,16 @@ export class TasksService {
           },
         ],
       },
+      select: {
+        id: true,
+        title: true,
+        date: true,
+        point: true,
+        status: true,
+        parentTaskId: true,
+        parentTask: true,
+        subTasks: true,
+      }
     });
 
     return tasks;

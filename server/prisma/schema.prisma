@@ -33,4 +33,8 @@ model Task {
   date   DateTime
   status TaskStatus
   point  Int
+
+  subTasks     Task[]  @relation("TaskSubTasks")
+  parentTaskId String?
+  parentTask   Task?   @relation("TaskSubTasks", fields: [parentTaskId], references: [id])
 }
