@@ -61,11 +61,11 @@ const Task = ({ task }: TaskProp) => {
 interface FormDialogProp {
   open: boolean;
   handleClose: () => void;
-  handleSubmit: (id: string, title: any, point: string,) => Promise<void>;
+  handleSubmit: (id: string, body: {title: any, point: number},) => Promise<void>;
   task: {
     id: string;
     title: any;
-    point: string;
+    point: number;
   };
 }
 
