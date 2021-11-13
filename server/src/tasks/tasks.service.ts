@@ -53,11 +53,10 @@ export class TasksService {
   }
 
   async update(id: string, updateTaskDto: UpdateTaskDto) {
-    console.log('hello');
-    const { title } = updateTaskDto;
+    const { title, point } = updateTaskDto;
     return await prisma.task.update({
-      where: { id: id },
-      data: { title: title },
+      where: { id },
+      data: { title, point },
     });
   }
 
