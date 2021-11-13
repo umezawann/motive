@@ -55,7 +55,7 @@ const Task = ({ task }: TaskPropType) => {
     <>
       <Card onClick={handleClickOpen}>
         <CardContent>
-          <div>{JSON.stringify(task)}</div>
+          <div>{task.title}</div>
           <ul>
             {task.subTasks.map(sub => (
               <div key={sub.id}>{sub.title}</div>

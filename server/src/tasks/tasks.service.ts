@@ -16,6 +16,8 @@ export class TasksService {
   }
 
   async findAll() {
+    // TODO: 親タスクだけ持ってきたい （条件: parentTaskIdが存在しない場合、という条件文を追加する）
+    // ref: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#where
     const tasks = await prisma.task.findMany();
 
     return tasks;
@@ -27,6 +29,8 @@ export class TasksService {
     const tomorrow = dayjs().add(1, 'day').startOf('day');
     console.log('tomorrow is', tomorrow);
 
+    // TODO: 親タスクだけ持ってきたい （条件: parentTaskIdが存在しない場合、という条件文を追加する）
+    // ref: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#where
     const tasks = await prisma.task.findMany({
       where: {
         AND: [
