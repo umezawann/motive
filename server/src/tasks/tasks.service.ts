@@ -53,14 +53,11 @@ export class TasksService {
   }
 
   async update(id: string, updateTaskDto: UpdateTaskDto) {
-    console.log('tasks.service', updateTaskDto)
-    return null
-    // const { title } = updateTaskDto[0];
-    // const point = parseInt(updateTaskDto[1].point);
-    // return await prisma.task.update({
-    //   where: { id: id },
-    //   data: { title: title, point: point },
-    // });
+    const { title, point } = updateTaskDto;
+    return await prisma.task.update({
+      where: { id },
+      data: { title, point },
+    });
   }
 
   async remove(id: string) {
