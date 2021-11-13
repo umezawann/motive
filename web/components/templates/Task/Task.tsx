@@ -16,7 +16,7 @@ interface TaskProp {
   task: {
     id: string;
     title: any;
-    point: string;
+    point: number;
   };
 }
 
@@ -31,10 +31,11 @@ const Task = ({ task }: TaskProp) => {
     setOpen(false);
   };
 
-  const handleSumbit = async (id: string, title: any, point: string) => {
+  const handleSumbit = async (id: string, body: {title: string, point: number}) => {
     console.log("handleSumbit id", id);
     // hint: web/pages/today/hooks.ts のaxios.postらへん
-    const body = [{ ...title}, { ...point}];
+    // const body = [{ ...title}, { ...point}];
+    // const body = {title, point}
     console.log('body is',body)
     const res = await apiClient.post(`/tasks/${id}`, body)
     console.log("res is", res);
@@ -83,27 +84,25 @@ function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
           margin="dense"
           id="title"
           label="Title"
-          type="email"
           fullWidth
           variant="standard"
           onChange={(event) => setTitle(event.target.value)}
           value={title}
-        ></TextField>
+        />
         <TextField
-          
+          type='number'
           margin="dense"
           id="point"
           label="Point"
-          type="email"
           fullWidth
           variant="standard"
-          onChange={(event) => setPoint(event.target.value)}
+          onChange={(event) => setPoint(parseInt(event.target.value))}
           value={point}
-        ></TextField>
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={() => handleSubmit(task.id, { title: title }, { point: point },)}>
+        <Button onClick={() => handleSubmit(task.id, { title, point },)}>
           Save
         </Button>
       </DialogActions>
