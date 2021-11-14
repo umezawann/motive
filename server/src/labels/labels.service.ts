@@ -1,30 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLabelDto } from './dto/create-label.dto';
 import { UpdateLabelDto } from './dto/update-label.dto';
-import { prisma } from '@/prisma';
-
 
 @Injectable()
 export class LabelsService {
-  async create(createLabelDto: CreateLabelDto) {
-    const label = await prisma.label.create({ data: createLabelDto });
-
-    return label;
+  create(createLabelDto: CreateLabelDto) {
+    return 'This action adds a new label';
   }
 
-  async findAll() {
+  findAll() {
     return `This action returns all labels`;
   }
 
-  async findOne(id: number) {
+  findOne(id: number) {
     return `This action returns a #${id} label`;
   }
 
-  async update(id: number, updateLabelDto: UpdateLabelDto) {
+  update(id: number, updateLabelDto: UpdateLabelDto) {
     return `This action updates a #${id} label`;
   }
 
-  async remove(id: number) {
+  remove(id: number) {
     return `This action removes a #${id} label`;
   }
 }
