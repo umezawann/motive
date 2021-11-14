@@ -28,6 +28,8 @@ import LabelIcon from '@mui/icons-material/Label';
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
+import LabelFormDialog from '@/components/templates/LabelFormDialog/index';
+import { apiClient } from '@/lib/axios'
 
 const drawerWidth = 240;
 
@@ -126,7 +128,7 @@ const Settings = styled('div')({
 export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  const [labelDialogOpen, setLabelDialogOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -138,6 +140,19 @@ export default function BaseLayout({ children }: { children: any }) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handleLabelDialogOpen = () => {
+    setLabelDialogOpen(true);
+  };
+
+  const handleLabelDialogClose = () => {
+    setLabelDialogOpen(false);
+  };
+
+  const handleLabelFormSubmit = async (values) => {
+    console.log('values ', values)
+    await apiClient.post('/labels', values);
+  }
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -165,151 +180,160 @@ export default function BaseLayout({ children }: { children: any }) {
   ];
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{
-              marginRight: '36px',
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            <Link href={getRoutes('root')}>
-              <a>
-                <MyComponent>Motive</MyComponent>
-              </a>
-            </Link>
-          </Typography>
-          <Box sx={{ flexGrow: 1 }} />
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: '110px',
-              padding: 'auto',
-            }}
-          >
-            <AccountCircleIcon></AccountCircleIcon>
-            <AccountCircleIcon></AccountCircleIcon>
-            <div>
-              <IconButton
-                onClick={handleClick}
-                color="inherit"
-                style={{ padding: '0px' }}
-              >
-                <AccountCircleIcon />
-              </IconButton>
-              <Popover
-                open={isOpen}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-              >
-                <Card sx={{ p: 2 }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      textAlign: 'center',
-                    }}
-                  >
-                    <AccountCircleIcon
-                      style={{ fontSize: '3rem', margin: '7px' }}
-                    />
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <Profile>First name, Last name</Profile>
-                      <Settings>e-mail address</Settings>
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      textAlign: 'center',
-                    }}
-                  >
-                    <div
-                      style={{
-                        padding: '7px',
-                      }}
-                    >
-                      <SettingsIcon />
-                    </div>
-                    <div style={{ lineHeight: '38px' }}>Settings</div>
-                  </div>
-                </Card>
-              </Popover>{' '}
-            </div>
-          </div>
-        </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          {items.map((text, index) => (
-            <Link href={getRoutes(text.key)} key={text.key}>
-              <a style={{ textDecoration: 'none', color: 'black' }}>
-                <ListItem button>
-                  <ListItemIcon>{text.component}</ListItemIcon>
-                  <ListItemText primary={text.key} />
-                </ListItem>
-              </a>
-            </Link>
-          ))}
-        </List>
-        <Divider />
-
-        <List>
-          <ListItem>
-            <div>label</div>
+    <>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar>
             <IconButton
               color="inherit"
+              aria-label="open drawer"
               onClick={handleDrawerOpen}
+              edge="start"
               sx={{
-                ...(!open && { display: 'none' }),
+                marginRight: '36px',
+                ...(open && { display: 'none' }),
               }}
             >
-              <AddIcon />
+              <MenuIcon />
             </IconButton>
-          </ListItem>
+            <Typography variant="h6" noWrap component="div">
+              <Link href={getRoutes('root')}>
+                <a>
+                  <MyComponent>Motive</MyComponent>
+                </a>
+              </Link>
+            </Typography>
+            <Box sx={{ flexGrow: 1 }} />
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '110px',
+                padding: 'auto',
+              }}
+            >
+              <AccountCircleIcon></AccountCircleIcon>
+              <AccountCircleIcon></AccountCircleIcon>
+              <div>
+                <IconButton
+                  onClick={handleClick}
+                  color="inherit"
+                  style={{ padding: '0px' }}
+                >
+                  <AccountCircleIcon />
+                </IconButton>
+                <Popover
+                  open={isOpen}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                >
+                  <Card sx={{ p: 2 }}>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        textAlign: 'center',
+                      }}
+                    >
+                      <AccountCircleIcon
+                        style={{ fontSize: '3rem', margin: '7px' }}
+                      />
+                      <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <Profile>First name, Last name</Profile>
+                        <Settings>e-mail address</Settings>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        textAlign: 'center',
+                      }}
+                    >
+                      <div
+                        style={{
+                          padding: '7px',
+                        }}
+                      >
+                        <SettingsIcon />
+                      </div>
+                      <div style={{ lineHeight: '38px' }}>Settings</div>
+                    </div>
+                  </Card>
+                </Popover>{' '}
+              </div>
+            </div>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'rtl' ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            {items.map((text, index) => (
+              <Link href={getRoutes(text.key)} key={text.key}>
+                <a style={{ textDecoration: 'none', color: 'black' }}>
+                  <ListItem button>
+                    <ListItemIcon>{text.component}</ListItemIcon>
+                    <ListItemText primary={text.key} />
+                  </ListItem>
+                </a>
+              </Link>
+            ))}
+          </List>
+          <Divider />
 
-          {[{ key: 'hoge', component: <div>hogehoge</div> }].map(
-            (text, index) => (
-              <ListItem button>
-                <ListItemIcon>
-                  <LabelIcon />
-                </ListItemIcon>
-                <ListItemText primary={text.key} />
-              </ListItem>
-            )
-          )}
-        </List>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        {children}
+          <List>
+            <ListItem>
+              <div>label</div>
+              <IconButton
+                color="inherit"
+                onClick={handleLabelDialogOpen}
+                sx={{
+                  ...(!open && { display: 'none' }),
+                }}
+              >
+                <AddIcon />
+              </IconButton>
+            </ListItem>
+
+            {/* TODO: display labels */}
+            {[{ key: 'hoge', component: <div>here are some labels</div> }].map(
+              (text, index) => (
+                <ListItem button>
+                  <ListItemIcon>
+                    <LabelIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={text.key} />
+                </ListItem>
+              )
+            )}
+          </List>
+        </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          {children}
+        </Box>
       </Box>
-    </Box>
+
+      <LabelFormDialog
+        open={labelDialogOpen}
+        handleClose={handleLabelDialogClose}
+        handleSubmit={handleLabelFormSubmit}
+      />
+    </>
   );
 }
