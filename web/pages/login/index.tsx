@@ -6,20 +6,21 @@ import TextField from "@mui/material/TextField";
 import Link from "next/link";
 import { useHooks } from "./hooks";
 import { textAlign } from "@mui/system";
+import { styled } from "@mui/material/styles";
 
 const Login: NextPage = () => {
   const { onSubmit } = useHooks();
 
+  const Container = styled("div")({
+    width: "400px",
+    height: "500px",
+    margin: "auto",
+    padding: "30px 0",
+  });
+
   return (
     <AuthLayout>
-      <div
-        style={{
-          width: "400px",
-          height: "500px",
-          margin: "auto",
-          padding: "30px 0",
-        }}
-      >
+      <Container>
         <div style={{ fontSize: "25px", fontWeight: "bold" }}>ログイン</div>
         <Form
           onSubmit={onSubmit}
@@ -36,11 +37,7 @@ const Login: NextPage = () => {
                         name={props.input.name}
                         value={props.input.value}
                         onChange={props.input.onChange}
-                        style={{
-                          width: "100%",
-                          margin: "auto",
-                          borderRadius: "5px",
-                        }}
+                        fullWidth
                       />
                     </div>
                   )}
@@ -92,7 +89,7 @@ const Login: NextPage = () => {
             <a style={{ color: "green" }}>サインアップ</a>
           </Link>
         </div>
-      </div>
+      </Container>
     </AuthLayout>
   );
 };

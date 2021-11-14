@@ -5,20 +5,21 @@ import Button, { ButtonProps } from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Link from "next/link";
 import { useHooks } from "./hooks";
+import { styled } from "@mui/material/styles";
 
 const Signup: NextPage = () => {
   const { onSubmit } = useHooks();
 
+  const Container = styled("div")({
+    width: "400px",
+    height: "500px",
+    margin: "auto",
+    padding: "30px 0",
+  });
+
   return (
     <AuthLayout>
-      <div
-        style={{
-          width: "400px",
-          height: "500px",
-          margin: "auto",
-          padding: "30px 0",
-        }}
-      >
+      <Container>
         <div style={{ fontSize: "25px", fontWeight: "bold" }}>サインアップ</div>
         <Form
           onSubmit={onSubmit}
@@ -35,11 +36,7 @@ const Signup: NextPage = () => {
                         name={props.input.name}
                         value={props.input.value}
                         onChange={props.input.onChange}
-                        style={{
-                          width: "100%",
-                          margin: "auto",
-                          borderRadius: "5px",
-                        }}
+                        fullWidth
                       />
                     </div>
                   )}
@@ -92,7 +89,7 @@ const Signup: NextPage = () => {
           </Link>
           に移動する
         </div>
-      </div>
+      </Container>
     </AuthLayout>
   );
 };
