@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import styled from 'styled-components'
-// import { Header as _Header } from './Header'
+import { Header, Header as _Header } from './Header'
 import { Column } from "./Column";
 import { styled } from "@mui/material/styles";
 
@@ -120,7 +120,9 @@ export function App() {
 
   return (
     <Container>
-      {/* <Header filterValue={filterValue} onFilterChange={setFilterValue} /> */}
+      <Header 
+       filterValue={filterValue} onFilterChange={setFilterValue} 
+      />
 
       <MainArea>
         <HorizontalScroll>
@@ -128,7 +130,7 @@ export function App() {
         <Column
           key={columnID}
           title={title}
-          // filterValue={filterValue}
+          filterValue={filterValue}
           cards={cards}
           onCardDragStart={(cardID) => setDraggingCardID(cardID)}
           onCardDrop={(entered) => dropCardTo(entered ?? columnID)}
