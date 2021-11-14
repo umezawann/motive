@@ -9,6 +9,7 @@ export class LabelsController {
 
   @Post()
   create(@Body() createLabelDto: CreateLabelDto) {
+    console.log('create endpoint is called')
     return this.labelsService.create(createLabelDto);
   }
 
