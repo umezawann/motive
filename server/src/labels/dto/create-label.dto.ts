@@ -5,5 +5,5 @@ export class CreateLabelDto {
   name: string
 
   @ApiProperty()
-  color: string
+  color?: string
 }

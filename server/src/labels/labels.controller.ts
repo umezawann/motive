@@ -8,28 +8,28 @@ export class LabelsController {
   constructor(private readonly labelsService: LabelsService) {}
 
   @Post()
-  create(@Body() createLabelDto: CreateLabelDto) {
+  async create(@Body() createLabelDto: CreateLabelDto) {
     console.log('create endpoint is called')
-    return this.labelsService.create(createLabelDto);
+    return await this.labelsService.create(createLabelDto);
   }
 
   @Get()
-  findAll() {
-    return this.labelsService.findAll();
+  async findAll() {
+    return await this.labelsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.labelsService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.labelsService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLabelDto: UpdateLabelDto) {
-    return this.labelsService.update(+id, updateLabelDto);
+  async update(@Param('id') id: string, @Body() updateLabelDto: UpdateLabelDto) {
+    return await this.labelsService.update(+id, updateLabelDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.labelsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.labelsService.remove(+id);
   }
 }
