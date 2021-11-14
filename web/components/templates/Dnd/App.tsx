@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 // import styled from 'styled-components'
-// import produce from 'immer'
 // import { Header as _Header } from './Header'
 import { Column } from "./Column";
 import { styled } from "@mui/material/styles";
@@ -12,17 +11,18 @@ export function App() {
     height: "100%",
   });
 
-  // const MainArea = styled.div`
-  // height: 100%;
-  // padding: 16px 0;
-  // overflow-y: auto;
-  // `
+  const MainArea = styled('div')({
+    height: '100%',
+    padding: '16px 0',
+    overflowY: 'auto',
+  })
 
-  // const HorizontalScroll = styled.div`
-  // display: flex;
-  // width: 100%;
-  // height: 100%;
-  // overflow-x: auto;
+
+  const HorizontalScroll = styled('div')({
+  display: 'flex',
+  width: '100%',
+  height: '100%',
+  overflowX: 'auto',
 
   // > * {
   //   margin-left: 16px;
@@ -34,9 +34,8 @@ export function App() {
   //   flex: 0 0 16px;
   //   content: '';
   // }
-  // `
-
-  const [filterValue, setFilterValue] = useState("");
+})
+  // const [filterValue, setFilterValue] = useState("");
   const [columns, setColumns] = useState([
     {
       id: "A",
@@ -79,7 +78,7 @@ export function App() {
 
     if (fromID === toID) return;
 
-    //     setColumns(columns => {
+        setColumns(columns => {
     const card = columns
       .flatMap((col) => col.cards)
       .find((c) => c.id === fromID);
@@ -116,26 +115,28 @@ export function App() {
 
       return newColumn;
     });
-  };
+  })
+        }
 
   return (
     <Container>
-      {/* <Header filterValue={filterValue} onFilterChange={setFilterValue} />
+      {/* <Header filterValue={filterValue} onFilterChange={setFilterValue} /> */}
 
       <MainArea>
-        <HorizontalScroll> */}
+        <HorizontalScroll>
       {columns.map(({ id: columnID, title, cards }) => (
         <Column
           key={columnID}
           title={title}
-          filterValue={filterValue}
+          // filterValue={filterValue}
           cards={cards}
           onCardDragStart={(cardID) => setDraggingCardID(cardID)}
           onCardDrop={(entered) => dropCardTo(entered ?? columnID)}
         />
       ))}
-      {/* </HorizontalScroll>
-      </MainArea> */}
+      </HorizontalScroll>
+      </MainArea>
     </Container>
   );
-}
+  }
+

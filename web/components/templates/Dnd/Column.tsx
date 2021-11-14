@@ -36,6 +36,32 @@ export function Column({
     // }
   });
 
+  const Header = styled('div')({
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: '8px',
+  })
+
+  const ColumnName = styled('div')({
+    color: `${color.Black}`,
+      fontSize: '14px',
+      fontWeight: 'bold',
+  })
+
+  const VerticalScroll = styled('div')({
+
+    height: '100%',
+    padding: '8px',
+    overflowY: 'auto',
+    flex: '1 1 auto',
+    
+    // > :not(:first-child) {
+    //   margin-top: 8px;
+    // }
+  })
+    
+
   const filterValue = rawFilterValue?.trim();
   const keywords = filterValue?.toLowerCase().split(/\s+/g) ?? [];
   const cards = rawCards.filter(({ text }) =>
@@ -60,14 +86,14 @@ export function Column({
 
   return (
     <Container>
-      {/* //   <Header>
-    //     <CountBadge>{totalCount}</CountBadge>
-    //     <ColumnName>{title}</ColumnName>
+        <Header>
+         {/* <CountBadge>{totalCount}</CountBadge> */}
+         <ColumnName>{title}</ColumnName>
 
-    //     <AddButton onClick={toggleInput} />
-    //   </Header>
+         {/* <AddButton onClick={toggleInput} /> */}
+      </Header>
 
-    //   {inputMode && ( */}
+      {/* {inputMode && ( */}
       {/* //     <InputForm */}
       {/* //       value={text}
     //       onChange={setText}
@@ -76,9 +102,9 @@ export function Column({
     //     />
     //   )} */}
 
-      {/* //   {filterValue && <ResultCount>{cards.length} results</ResultCount>}
+         {/* {filterValue && <ResultCount>{cards.length} results</ResultCount>} */}
 
-    //   <VerticalScroll> */}
+       <VerticalScroll>
       {cards.map(({ id, text }, i) => (
         <Card.DropArea
           key={id}
@@ -104,31 +130,11 @@ export function Column({
         }
         onDrop={() => onCardDrop?.(null)}
       />
-      {/* </VerticalScroll> */}
+      </VerticalScroll>
     </Container>
   );
 }
 
-// const Container = styled.div`
-//   display: flex;
-//   flex-flow: column;
-//   width: 355px;
-//   height: 100%;
-//   border: solid 1px ${color.Silver};
-//   border-radius: 6px;
-//   background-color: ${color.LightSilver};
-
-//   > :not(:last-child) {
-//     flex-shrink: 0;
-//   }
-// `
-
-// const Header = styled.div`
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-//   padding: 8px;
-// `
 
 // const CountBadge = styled.div`
 //   margin-right: 8px;
@@ -138,12 +144,6 @@ export function Column({
 //   background-color: ${color.Silver};
 //   font-size: 12px;
 //   line-height: 1;
-// `
-
-// const ColumnName = styled.div`
-//   color: ${color.Black};
-//   font-size: 14px;
-//   font-weight: bold;
 // `
 
 // const AddButton = styled.button.attrs({
@@ -168,13 +168,4 @@ export function Column({
 //   text-align: center;
 // `
 
-// const VerticalScroll = styled.div`
-//   height: 100%;
-//   padding: 8px;
-//   overflow-y: auto;
-//   flex: 1 1 auto;
 
-//   > :not(:first-child) {
-//     margin-top: 8px;
-//   }
-// `
