@@ -13,7 +13,8 @@ export class LabelsService {
   }
 
   async findAll() {
-    return `This action returns all labels`;
+    const labels = await prisma.label.findMany();
+    return labels;
   }
 
   async findOne(id: number) {

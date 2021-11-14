@@ -30,6 +30,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
 import LabelFormDialog from '@/components/templates/LabelFormDialog/index';
 import { apiClient } from '@/lib/axios'
+import {useLabels} from '@/hooks/api/labels'
 
 const drawerWidth = 240;
 
@@ -129,6 +130,7 @@ export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [labelDialogOpen, setLabelDialogOpen] = React.useState(false);
+  const {data: labels} = useLabels()
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -152,6 +154,7 @@ export default function BaseLayout({ children }: { children: any }) {
   const handleLabelFormSubmit = async (values) => {
     console.log('values ', values)
     await apiClient.post('/labels', values);
+    handleLabelDialogClose()
   }
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -311,13 +314,13 @@ export default function BaseLayout({ children }: { children: any }) {
             </ListItem>
 
             {/* TODO: display labels */}
-            {[{ key: 'hoge', component: <div>here are some labels</div> }].map(
-              (text, index) => (
-                <ListItem button>
+            {labels.map(
+              (label) => (
+                <ListItem button key={label.id}>
                   <ListItemIcon>
                     <LabelIcon />
                   </ListItemIcon>
-                  <ListItemText primary={text.key} />
+                  <ListItemText primary={label.name} />
                 </ListItem>
               )
             )}
