@@ -17,8 +17,19 @@ export function Card({
 }) {
   const [drag, setDrag] = useState(false);
 
+  const Container = styled("div")({
+    position: "relative",
+    border: `solid 1px ${color.Silver}`,
+    borderRadius: "6px",
+    boxShadow: " 0 1px 3px hsla(0, 0%, 7%, 0.1)",
+    padding: "8px 32px",
+    backgroundColor: `${color.White}`,
+    cursor: "move",
+  });
+
   return (
     <Container
+      draggable="true"
       style={{ opacity: drag ? 0.5 : undefined }}
       onDragStart={() => {
         onDragStart?.();
@@ -45,17 +56,6 @@ export function Card({
     </Container>
   );
 }
-
-const Container = styled("div")({
-  draggable: "true",
-  position: "relative",
-  border: `solid 1px ${color.Silver}`,
-  borderRadius: "6px",
-  boxShadow: " 0 1px 3px hsla(0, 0%, 7%, 0.1)",
-  padding: "8px 32px",
-  backgroundColor: `${color.White}`,
-  cursor: "move",
-});
 
 // const CheckIcon = styled(_CheckIcon)`
 //   position: absolute;

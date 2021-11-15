@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import styled from 'styled-components'
-import { Header, Header as _Header } from './Header'
+import { Header, Header as _Header } from "./Header";
 import { Column } from "./Column";
 import { styled } from "@mui/material/styles";
 
@@ -11,30 +11,29 @@ export function App() {
     height: "100%",
   });
 
-  const MainArea = styled('div')({
-    height: '100%',
-    padding: '16px 0',
-    overflowY: 'auto',
-  })
+  const MainArea = styled("div")({
+    height: "100%",
+    padding: "16px 0",
+    overflowY: "auto",
+  });
 
+  const HorizontalScroll = styled("div")({
+    display: "flex",
+    width: "100%",
+    height: "100%",
+    overflowX: "auto",
 
-  const HorizontalScroll = styled('div')({
-  display: 'flex',
-  width: '100%',
-  height: '100%',
-  overflowX: 'auto',
+    // > * {
+    //   margin-left: 16px;
+    //   flex-shrink: 0;
+    // }
 
-  // > * {
-  //   margin-left: 16px;
-  //   flex-shrink: 0;
-  // }
-
-  // ::after {
-  //   display: block;
-  //   flex: 0 0 16px;
-  //   content: '';
-  // }
-})
+    // ::after {
+    //   display: block;
+    //   flex: 0 0 16px;
+    //   content: '';
+    // }
+  });
   // const [filterValue, setFilterValue] = useState("");
   const [columns, setColumns] = useState([
     {
@@ -78,67 +77,66 @@ export function App() {
 
     if (fromID === toID) return;
 
-        setColumns(columns => {
-    const card = columns
-      .flatMap((col) => col.cards)
-      .find((c) => c.id === fromID);
-    if (!card) {
-      return columns;
-    }
-
-    return columns.map((column) => {
-      let newColumn = column;
-
-      if (newColumn.cards.some((c) => c.id === fromID)) {
-        newColumn = {
-          ...newColumn,
-          cards: newColumn.cards.filter((c) => c.id !== fromID),
-        };
+    setColumns((columns) => {
+      const card = columns
+        .flatMap((col) => col.cards)
+        .find((c) => c.id === fromID);
+      if (!card) {
+        return columns;
       }
 
-      // 列の末尾に移動
-      if (newColumn.id === toID) {
-        newColumn = {
-          ...newColumn,
-          cards: [...newColumn.cards, card],
-        };
-      }
-      // 列の末尾以外に移動
-      else if (newColumn.cards.some((c) => c.id === toID)) {
-        newColumn = {
-          ...newColumn,
-          cards: newColumn.cards.flatMap((c) =>
-            c.id === toID ? [card, c] : [c]
-          ),
-        };
-      }
+      return columns.map((column) => {
+        let newColumn = column;
 
-      return newColumn;
-    });
-  })
+        if (newColumn.cards.some((c) => c.id === fromID)) {
+          newColumn = {
+            ...newColumn,
+            cards: newColumn.cards.filter((c) => c.id !== fromID),
+          };
         }
+
+        // 列の末尾に移動
+        if (newColumn.id === toID) {
+          newColumn = {
+            ...newColumn,
+            cards: [...newColumn.cards, card],
+          };
+        }
+        // 列の末尾以外に移動
+        else if (newColumn.cards.some((c) => c.id === toID)) {
+          newColumn = {
+            ...newColumn,
+            cards: newColumn.cards.flatMap((c) =>
+              c.id === toID ? [card, c] : [c]
+            ),
+          };
+        }
+
+        return newColumn;
+      });
+    });
+  };
 
   return (
     <Container>
-      <Header 
-       filterValue={filterValue} onFilterChange={setFilterValue} 
-      />
+      {/* <Header 
+       filterValue={filterValue} onFilterChange={setFilterValue} cards
+      /> */}
 
       <MainArea>
         <HorizontalScroll>
-      {columns.map(({ id: columnID, title, cards }) => (
-        <Column
-          key={columnID}
-          title={title}
-          filterValue={filterValue}
-          cards={cards}
-          onCardDragStart={(cardID) => setDraggingCardID(cardID)}
-          onCardDrop={(entered) => dropCardTo(entered ?? columnID)}
-        />
-      ))}
-      </HorizontalScroll>
+          {columns.map(({ id: columnID, title, cards }) => (
+            <Column
+              key={columnID}
+              title={title}
+              // filterValue={filterValue}
+              cards={cards}
+              onCardDragStart={(cardID) => setDraggingCardID(cardID)}
+              onCardDrop={(entered) => dropCardTo(entered ?? columnID)}
+            />
+          ))}
+        </HorizontalScroll>
       </MainArea>
     </Container>
   );
-  }
-
+}

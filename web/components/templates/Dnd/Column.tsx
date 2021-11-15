@@ -8,13 +8,13 @@ import { styled } from "@mui/material/styles";
 
 export function Column({
   title,
-  filterValue: rawFilterValue,
+  // filterValue: rawFilterValue,
   cards: rawCards,
   onCardDragStart,
   onCardDrop,
 }: {
   title?: string;
-  filterValue?: string;
+  // filterValue?: string;
   cards: {
     id: string;
     text?: string;
@@ -36,40 +36,38 @@ export function Column({
     // }
   });
 
-  const Header = styled('div')({
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    padding: '8px',
-  })
+  const Header = styled("div")({
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    padding: "8px",
+  });
 
-  const ColumnName = styled('div')({
+  const ColumnName = styled("div")({
     color: `${color.Black}`,
-      fontSize: '14px',
-      fontWeight: 'bold',
-  })
+    fontSize: "14px",
+    fontWeight: "bold",
+  });
 
-  const VerticalScroll = styled('div')({
+  const VerticalScroll = styled("div")({
+    height: "100%",
+    padding: "8px",
+    overflowY: "auto",
+    flex: "1 1 auto",
 
-    height: '100%',
-    padding: '8px',
-    overflowY: 'auto',
-    flex: '1 1 auto',
-    
     // > :not(:first-child) {
     //   margin-top: 8px;
     // }
-  })
-    
+  });
 
-  const filterValue = rawFilterValue?.trim();
-  const keywords = filterValue?.toLowerCase().split(/\s+/g) ?? [];
-  const cards = rawCards.filter(({ text }) =>
-    keywords?.every((w) => text?.toLowerCase().includes(w))
-  );
-  const totalCount = rawCards.length;
+  // const filterValue = rawFilterValue?.trim();
+  // const keywords = filterValue?.toLowerCase().split(/\s+/g) ?? [];
+  // const cards = rawCards.filter(({ text }) =>
+  //   keywords?.every((w) => text?.toLowerCase().includes(w))
+  // );
+  // const totalCount = rawCards.length;
 
-  const [text, setText] = useState("");
+  // const [text, setText] = useState("");
 
   //   const [inputMode, setInputMode] = useState(false)
   //   const toggleInput = () => setInputMode(v => !v)
@@ -86,11 +84,11 @@ export function Column({
 
   return (
     <Container>
-        <Header>
-         {/* <CountBadge>{totalCount}</CountBadge> */}
-         <ColumnName>{title}</ColumnName>
+      <Header>
+        {/* <CountBadge>{totalCount}</CountBadge> */}
+        <ColumnName>{title}</ColumnName>
 
-         {/* <AddButton onClick={toggleInput} /> */}
+        {/* <AddButton onClick={toggleInput} /> */}
       </Header>
 
       {/* {inputMode && ( */}
@@ -102,39 +100,38 @@ export function Column({
     //     />
     //   )} */}
 
-         {/* {filterValue && <ResultCount>{cards.length} results</ResultCount>} */}
+      {/* {filterValue && <ResultCount>{cards.length} results</ResultCount>} */}
 
-       <VerticalScroll>
-      {cards.map(({ id, text }, i) => (
+      <VerticalScroll>
+        {rawCards.map(({ id, text }, i) => (
+          <Card.DropArea
+            key={id}
+            disabled={
+              draggingCardID !== undefined &&
+              (id === draggingCardID || rawCards[i - 1]?.id === draggingCardID)
+            }
+            onDrop={() => onCardDrop?.(id)}
+          >
+            <Card
+              text={text}
+              onDragStart={() => handleCardDragStart(id)}
+              onDragEnd={() => setDraggingCardID(undefined)}
+            />
+          </Card.DropArea>
+        ))}
+
         <Card.DropArea
-          key={id}
+          style={{ height: "100%" }}
           disabled={
             draggingCardID !== undefined &&
-            (id === draggingCardID || cards[i - 1]?.id === draggingCardID)
+            rawCards[rawCards.length - 1]?.id === draggingCardID
           }
-          onDrop={() => onCardDrop?.(id)}
-        >
-          <Card
-            text={text}
-            onDragStart={() => handleCardDragStart(id)}
-            onDragEnd={() => setDraggingCardID(undefined)}
-          />
-        </Card.DropArea>
-      ))}
-
-      <Card.DropArea
-        style={{ height: "100%" }}
-        disabled={
-          draggingCardID !== undefined &&
-          cards[cards.length - 1]?.id === draggingCardID
-        }
-        onDrop={() => onCardDrop?.(null)}
-      />
+          onDrop={() => onCardDrop?.(null)}
+        />
       </VerticalScroll>
     </Container>
   );
 }
-
 
 // const CountBadge = styled.div`
 //   margin-right: 8px;
@@ -167,5 +164,3 @@ export function Column({
 //   font-size: 12px;
 //   text-align: center;
 // `
-
-
