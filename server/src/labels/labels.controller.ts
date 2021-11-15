@@ -1,0 +1,35 @@
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { LabelsService } from './labels.service';
+import { CreateLabelDto } from './dto/create-label.dto';
+import { UpdateLabelDto } from './dto/update-label.dto';
+
+@Controller('labels')
+export class LabelsController {
+  constructor(private readonly labelsService: LabelsService) {}
+
+  @Post()
+  async create(@Body() createLabelDto: CreateLabelDto) {
+    console.log('create endpoint is called')
+    return await this.labelsService.create(createLabelDto);
+  }
+
+  @Get()
+  async findAll() {
+    return await this.labelsService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    return await this.labelsService.findOne(+id);
+  }
+
+  @Patch(':id')
+  async update(@Param('id') id: string, @Body() updateLabelDto: UpdateLabelDto) {
+    return await this.labelsService.update(+id, updateLabelDto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return await this.labelsService.remove(+id);
+  }
+}
