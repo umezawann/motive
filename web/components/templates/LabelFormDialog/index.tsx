@@ -21,7 +21,9 @@ interface FormDialogProp {
 
 export default function LabelFormDialog({ open, handleClose, handleSubmit }: FormDialogProp) {
   const [name, setName] = React.useState<null | string>(null);
-  const [color, setColor] = React.useState<null | string>(null);
+  const [color, setColor] = React.useState<string>('#ccc');
+
+
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -38,16 +40,16 @@ export default function LabelFormDialog({ open, handleClose, handleSubmit }: For
           onChange={(event) => setName(event.target.value)}
           value={name}
         />
-        {/* <TextField
-          type="number"
+        <TextField
+          type="text"
           margin="dense"
           id="color"
           label="color"
           fullWidth
           variant="standard"
-          onChange={(event) => setColor(parseInt(event.target.value))}
+          onChange={(event) => setColor(event.target.value)}
           value={color}
-        /> */}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
