@@ -46,9 +46,10 @@ model Label {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name  String
-  color String?
-  tasks LabelsOnTasks[]
+  name             String
+  color            String?
+  tasks            LabelsOnTasks[]
+  favoriteOnLabels FavoriteOnLabel[]
 }
 
 model LabelsOnTasks {
@@ -61,4 +62,27 @@ model LabelsOnTasks {
   labelId String
 
   @@id([taskId, labelId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name              String
+  color             String?
+  favoriteOnLabelId String
+  favoriteOnLabels  FavoriteOnLabel[]
+}
+
+model FavoriteOnLabel {
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  favorite   Favorite @relation(fields: [favoriteId], references: [id])
+  favoriteId String
+  label      Label    @relation(fields: [labelId], references: [id])
+  labelId    String
+
+  @@id([favoriteId, labelId])
 }
