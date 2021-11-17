@@ -3,7 +3,7 @@ import { useTasksOfDay, useTasksInYear } from '@/lib/api/tasks';
 import { get, set } from '@/lib/storage'
 import { apiClient } from '@/lib/axios'
 import { useRouter } from 'next/router'
-import { getRoutes } from './../../lib/routes';
+import { getRoutes } from '@/lib/routes';
 
 export const useHooks = () => {
   const router = useRouter()
