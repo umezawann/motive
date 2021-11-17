@@ -46,10 +46,10 @@ model Label {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name             String
-  color            String?
-  tasks            LabelsOnTasks[]
-  favoriteOnLabels FavoriteOnLabel[]
+  name           String
+  color          String?
+  tasks          LabelsOnTasks[]
+  favoriteLabels FavoriteLabel[]
 }
 
 model LabelsOnTasks {
@@ -69,20 +69,22 @@ model Favorite {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name              String
-  color             String?
-  favoriteOnLabelId String
-  favoriteOnLabels  FavoriteOnLabel[]
+  // favoriteLabels FavoriteLabel[]
+
+  favoriteLabel   FavoriteLabel? @relation("FavoriteLabel", fields: [favoriteLabelId], references: [id])
+  favoriteLabelId String?
+  // Favorite        Favorite[] @relation("FavoriteLabel")
 }
 
-model FavoriteOnLabel {
+// TODO: よくわからなくなってきた
+model FavoriteLabel {
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  favorite   Favorite @relation(fields: [favoriteId], references: [id])
-  favoriteId String
-  label      Label    @relation(fields: [labelId], references: [id])
-  labelId    String
-
-  @@id([favoriteId, labelId])
+  // favorite   Favorite @relation(fields: [favoriteId], references: [id])
+  // favoriteId String
+  label    Label?     @relation(fields: [labelId], references: [id])
+  labelId  String
+  favorite Favorite[] @relation("FavoriteLabel")
 }

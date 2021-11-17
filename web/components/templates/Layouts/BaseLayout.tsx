@@ -130,6 +130,7 @@ export default function BaseLayout({ children }: { children: any }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [labelDialogOpen, setLabelDialogOpen] = React.useState(false);
+  const [favoriteDialogOpen, setFavoriteDialogOpen] = React.useState(false);
   const {data: labels} = useLabels()
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
@@ -298,6 +299,24 @@ export default function BaseLayout({ children }: { children: any }) {
             ))}
           </List>
           <Divider />
+
+          <List>
+            <ListItem>
+              <div>Favorite</div>
+            </ListItem>
+
+            {/* TODO: use favorites */}
+            {/* {labels.map(
+              (label) => (
+                <ListItem button key={label.id}>
+                  <ListItemIcon>
+                    <LabelIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={label.name} />
+                </ListItem>
+              )
+            )} */}
+          </List>
 
           <List>
             <ListItem>
