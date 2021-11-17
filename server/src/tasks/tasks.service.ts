@@ -18,7 +18,10 @@ export class TasksService {
   async findAll() {
     // TODO: 親タスクだけ持ってきたい （条件: parentTaskIdが存在しない場合、という条件文を追加する）
     // ref: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#where
-    const tasks = await prisma.task.findMany();
+    const tasks = await prisma.task.findMany({
+      where : {
+        parentTaskId: null
+      }});
 
     return tasks;
   }
@@ -45,6 +48,7 @@ export class TasksService {
             },
           },
         ],
+        parentTaskId: null,
       },
       select: {
         id: true,
