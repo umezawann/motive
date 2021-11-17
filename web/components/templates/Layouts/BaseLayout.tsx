@@ -31,9 +31,9 @@ import Stack from "@mui/material/Stack";
 import LabelFormDialog from "@/components/templates/LabelFormDialog/index";
 import { apiClient } from "@/lib/axios";
 import { useLabels } from "@/hooks/api/labels";
-import EditIcon from "@mui/icons-material/Edit";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
+import Label from "components/templates/Label/Label";
 
 const drawerWidth = 240;
 
@@ -349,24 +349,7 @@ export default function BaseLayout({ children }: { children: any }) {
                       horizontal: "left",
                     }}
                   >
-                    <Card sx={{ p: 2 }}>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          textAlign: "center",
-                        }}
-                      >
-                        <div
-                          style={{
-                            padding: "7px",
-                          }}
-                        >
-                          <EditIcon />
-                        </div>
-                        <div style={{ lineHeight: "38px" }}>編集する</div>
-                      </div>
-                    </Card>
+                    <Label label={label} />
                   </Popover>{" "}
                 </div>
               </ListItem>
