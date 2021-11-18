@@ -68,7 +68,7 @@ const Label = ({ label }: LabelPropType) => {
     <>
       <ListItem button key={label.id}>
         <ListItemIcon>
-          <LabelIcon style={{ color: label.color }} />
+          <LabelIcon sx={{ color: label.color }} />
         </ListItemIcon>
         <ListItemText primary={label.name} />
         <div>
