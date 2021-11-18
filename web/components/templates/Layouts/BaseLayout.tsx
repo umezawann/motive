@@ -33,7 +33,7 @@ import { apiClient } from "@/lib/axios";
 import { useLabels } from "@/hooks/api/labels";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import MoreHoriz from "@mui/icons-material/MoreHoriz";
-import Label from "components/templates/Label/Label";
+import Label from "@/components/templates/Label";
 
 const drawerWidth = 240;
 
@@ -313,10 +313,11 @@ export default function BaseLayout({ children }: { children: any }) {
                 <AddIcon />
               </IconButton>
             </ListItem>
-
+            
             {/* TODO: display labels */}
-
-            <Label labels={labels} />
+            {labels.map((label) => (
+              <Label label={label} key={label.id}/>
+            ))}
           </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

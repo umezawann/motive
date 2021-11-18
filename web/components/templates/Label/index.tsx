@@ -28,10 +28,10 @@ type LabelType = {
   color: string;
 };
 type LabelPropType = {
-  labels: LabelType[];
+  label: LabelType;
 };
 
-const Label = ({ labels }: LabelPropType) => {
+const Label = ({ label }: LabelPropType) => {
   const [open, setOpen] = React.useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -66,49 +66,47 @@ const Label = ({ labels }: LabelPropType) => {
 
   return (
     <>
-      {labels.map((label) => (
-        <ListItem button key={label.id}>
-          <ListItemIcon>
-            <LabelIcon  style={{color: label.color}}/>
-          </ListItemIcon>
-          <ListItemText primary={label.name} />
-          <div>
-            <IconButton
-              onClick={labelClick}
-              color="inherit"
-              style={{ padding: "0px" }}
-            >
-              <MoreHoriz />
-            </IconButton>
-            <Popover
-              open={labelIsOpen}
-              anchorEl={anchorEl}
-              onClose={labelClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-            >
-              <Card onClick={handleClickOpen} sx={{ p: 1 }}>
-                <CardContent>
-                 <Stack direction="row" spacing={1}>
-                    <div style={{ padding: "7px",}}>
-                      <EditIcon />
-                    </div>
-                    <div style={{ lineHeight: "38px" }}>編集する</div>
-                  </Stack>
-                </CardContent>
-              </Card>
-              <FormDialog
-                open={open}
-                handleClose={handleClose}
-                label={label}
-                handleSubmit={handleSubmit}
-              />
-            </Popover>{" "}
-          </div>
-        </ListItem>
-      ))}
+      <ListItem button key={label.id}>
+        <ListItemIcon>
+          <LabelIcon style={{ color: label.color }} />
+        </ListItemIcon>
+        <ListItemText primary={label.name} />
+        <div>
+          <IconButton
+            onClick={labelClick}
+            color="inherit"
+            style={{ padding: "0px" }}
+          >
+            <MoreHoriz />
+          </IconButton>
+          <Popover
+            open={labelIsOpen}
+            anchorEl={anchorEl}
+            onClose={labelClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+          >
+            <Card onClick={handleClickOpen} sx={{ p: 1 }}>
+              <CardContent>
+                <Stack direction="row" spacing={1}>
+                  <div style={{ padding: "7px" }}>
+                    <EditIcon />
+                  </div>
+                  <div style={{ lineHeight: "38px" }}>編集する</div>
+                </Stack>
+              </CardContent>
+            </Card>
+            <FormDialog
+              open={open}
+              handleClose={handleClose}
+              label={label}
+              handleSubmit={handleSubmit}
+            />
+          </Popover>{" "}
+        </div>
+      </ListItem>
     </>
   );
 };
