@@ -38,11 +38,11 @@ const Task = ({ task }: TaskPropType) => {
     setOpen(false);
   };
 
-  const handleSumbit = async (
+  const handleSubmit = async (
     id: string,
     body: { title: string; point: number }
   ) => {
-    console.log('handleSumbit id', id);
+    console.log('handleSubmit id', id);
     // hint: web/pages/today/hooks.ts のaxios.postらへん
     // const body = [{ ...title}, { ...point}];
     // const body = {title, point}
@@ -67,7 +67,7 @@ const Task = ({ task }: TaskPropType) => {
         open={open}
         handleClose={handleClose}
         task={task}
-        handleSubmit={handleSumbit}
+        handleSubmit={handleSubmit}
       />
     </>
   );

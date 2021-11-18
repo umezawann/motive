@@ -21,8 +21,13 @@ export class LabelsService {
     return `This action returns a #${id} label`;
   }
 
-  async update(id: number, updateLabelDto: UpdateLabelDto) {
-    return `This action updates a #${id} label`;
+  async update(id: string, updateLabelDto: UpdateLabelDto) {
+    const { name, color } = updateLabelDto;
+    console.log('label is', updateLabelDto)
+    return await prisma.label.update({
+      where: { id },
+      data: { name, color },
+    });
   }
 
   async remove(id: number) {

@@ -23,10 +23,11 @@ export class LabelsController {
     return await this.labelsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Post(':id')
   async update(@Param('id') id: string, @Body() updateLabelDto: UpdateLabelDto) {
-    return await this.labelsService.update(+id, updateLabelDto);
+    return await this.labelsService.update(id, updateLabelDto);
   }
+
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
