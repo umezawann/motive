@@ -47,7 +47,7 @@ model Label {
   updatedAt DateTime @updatedAt
 
   name  String
-  color String?
+  color String
   tasks LabelsOnTasks[]
 }
 
