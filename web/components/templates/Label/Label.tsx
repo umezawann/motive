@@ -12,6 +12,15 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import EditIcon from "@mui/icons-material/Edit";
 import { apiClient } from "@/lib/axios";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import LabelIcon from "@mui/icons-material/Label";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import MoreHoriz from "@mui/icons-material/MoreHoriz";
+import Popover from "@mui/material/Popover";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
 
 type LabelType = {
   id: string;
@@ -19,11 +28,15 @@ type LabelType = {
   color: string;
 };
 type LabelPropType = {
-  label: LabelType;
+  labels: LabelType[];
 };
 
-const Label = ({ label }: LabelPropType) => {
+const Label = ({ labels }: LabelPropType) => {
   const [open, setOpen] = React.useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -41,34 +54,61 @@ const Label = ({ label }: LabelPropType) => {
     const res = await apiClient.post(`/labels/${id}`, body);
   };
 
+  const labelClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const labelClose = () => {
+    setAnchorEl(null);
+  };
+
+  const labelIsOpen = Boolean(anchorEl);
+
   return (
     <>
-      <Card onClick={handleClickOpen} sx={{ p: 2}}>
-        <CardContent>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "flex-start",
-              textAlign: "center",
-            }}
-          >
-            <div
-              style={{
-                padding: "7px",
+      {labels.map((label) => (
+        <ListItem button key={label.id}>
+          <ListItemIcon>
+            <LabelIcon  style={{color: label.color}}/>
+          </ListItemIcon>
+          <ListItemText primary={label.name} />
+          <div>
+            <IconButton
+              onClick={labelClick}
+              color="inherit"
+              style={{ padding: "0px" }}
+            >
+              <MoreHoriz />
+            </IconButton>
+            <Popover
+              open={labelIsOpen}
+              anchorEl={anchorEl}
+              onClose={labelClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
               }}
             >
-              <EditIcon />
-            </div>
-            <div style={{ lineHeight: "38px" }}>編集する</div>
+              <Card onClick={handleClickOpen} sx={{ p: 1 }}>
+                <CardContent>
+                 <Stack direction="row" spacing={1}>
+                    <div style={{ padding: "7px",}}>
+                      <EditIcon />
+                    </div>
+                    <div style={{ lineHeight: "38px" }}>編集する</div>
+                  </Stack>
+                </CardContent>
+              </Card>
+              <FormDialog
+                open={open}
+                handleClose={handleClose}
+                label={label}
+                handleSubmit={handleSubmit}
+              />
+            </Popover>{" "}
           </div>
-        </CardContent>
-      </Card>
-      <FormDialog
-        open={open}
-        handleClose={handleClose}
-        label={label}
-        handleSubmit={handleSubmit}
-      />
+        </ListItem>
+      ))}
     </>
   );
 };

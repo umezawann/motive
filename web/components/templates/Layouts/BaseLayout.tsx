@@ -134,9 +134,7 @@ export default function BaseLayout({ children }: { children: any }) {
   const [open, setOpen] = React.useState(false);
   const [labelDialogOpen, setLabelDialogOpen] = React.useState(false);
   const { data: labels } = useLabels();
-  const [anchorAccountEl, setAnchorAccountEl] =
-    React.useState<HTMLButtonElement | null>(null);
-  const [anchorLabelEl, setAnchorLabelEl] =
+  const [anchorEl, setAnchorEl] =
     React.useState<HTMLButtonElement | null>(null);
 
   const handleDrawerOpen = () => {
@@ -161,23 +159,14 @@ export default function BaseLayout({ children }: { children: any }) {
     handleLabelDialogClose();
   };
 
-  const accountClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorAccountEl(event.currentTarget);
+  const hadleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const accountClose = () => {
-    setAnchorAccountEl(null);
+  const handleClose = () => {
+    setAnchorEl(null);
   };
-  const labelClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorLabelEl(event.currentTarget);
-  };
-
-  const labelClose = () => {
-    setAnchorLabelEl(null);
-  };
-
-  const accountIsOpen = Boolean(anchorAccountEl);
-  const labelIsOpen = Boolean(anchorLabelEl);
+  const isOpen = Boolean(anchorEl);
 
   const items = [
     {
@@ -233,16 +222,16 @@ export default function BaseLayout({ children }: { children: any }) {
               <AccountCircleIcon></AccountCircleIcon>
               <div>
                 <IconButton
-                  onClick={accountClick}
+                  onClick={hadleClick}
                   color="inherit"
                   style={{ padding: "0px" }}
                 >
                   <AccountCircleIcon />
                 </IconButton>
                 <Popover
-                  open={accountIsOpen}
-                  anchorEl={anchorAccountEl}
-                  onClose={accountClose}
+                  open={isOpen}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
                   anchorOrigin={{
                     vertical: "bottom",
                     horizontal: "left",
@@ -326,34 +315,8 @@ export default function BaseLayout({ children }: { children: any }) {
             </ListItem>
 
             {/* TODO: display labels */}
-            {labels.map((label) => (
-              <ListItem button key={label.id}>
-                <ListItemIcon>
-                  <LabelIcon />
-                </ListItemIcon>
-                <ListItemText primary={label.name} />
-                <div>
-                  <IconButton
-                    onClick={labelClick}
-                    color="inherit"
-                    style={{ padding: "0px" }}
-                  >
-                    <MoreHoriz />
-                  </IconButton>
-                  <Popover
-                    open={labelIsOpen}
-                    anchorEl={anchorLabelEl}
-                    onClose={labelClose}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                  >
-                    <Label label={label} />
-                  </Popover>{" "}
-                </div>
-              </ListItem>
-            ))}
+
+            <Label labels={labels} />
           </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
