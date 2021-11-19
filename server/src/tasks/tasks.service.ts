@@ -31,6 +31,7 @@ export class TasksService {
     console.log('today is', today);
     const tomorrow = dayjs().add(1, 'day').startOf('day');
     console.log('tomorrow is', tomorrow);
+    console.log('GET, tasks/today')
 
     // TODO: 親タスクだけ持ってきたい （条件: parentTaskIdが存在しない場合、という条件文を追加する）
     // ref: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#where

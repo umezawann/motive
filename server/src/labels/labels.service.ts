@@ -17,8 +17,16 @@ export class LabelsService {
     return labels;
   }
 
-  async findOne(id: number) {
-    return `This action returns a #${id} label`;
+  // async findOne(id: number) {
+  //   return `This action returns a #${id} label`;
+  // }
+
+  async findOne(id: string) {
+    return await prisma.labelsOnTasks.findMany({
+      where: { labelId: id},
+      include: { task: true }
+    })
+    ;
   }
 
   async update(id: string, updateLabelDto: UpdateLabelDto) {

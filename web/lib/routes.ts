@@ -3,7 +3,7 @@ const paths = {
   today: '/today',
   settings: '/settings',
   logs: '/logs',
-  upcoming: '/upcoming'
+  upcoming: '/upcoming',
 }
 
 export const getRoutes = (key: keyof typeof paths) => {

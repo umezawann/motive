@@ -18,9 +18,14 @@ export class LabelsController {
     return await this.labelsService.findAll();
   }
 
+  // @Get(':id')
+  // async findOne(@Param('id') id: string) {
+  //   return await this.labelsService.findOne(+id);
+  // }
+
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.labelsService.findOne(+id);
+  async findOne2(@Param('id') id: string) {
+    return await this.labelsService.findOne(id);
   }
 
   @Post(':id')
