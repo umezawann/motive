@@ -46,10 +46,11 @@ model Label {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name           String
-  color          String?
-  tasks          LabelsOnTasks[]
-  favoriteLabels FavoriteLabel[]
+  name  String
+  color String
+  tasks LabelsOnTasks[]
+    favoriteLabels FavoriteLabel[]
+
 }
 
 model LabelsOnTasks {

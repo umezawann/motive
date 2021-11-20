@@ -29,8 +29,11 @@ import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
 import AddIcon from '@mui/icons-material/Add';
 import Stack from '@mui/material/Stack';
 import LabelFormDialog from '@/components/templates/LabelFormDialog/index';
-import { apiClient } from '@/lib/axios'
-import {useLabels} from '@/hooks/api/labels'
+import { apiClient } from '@/lib/axios';
+import { useLabels } from '@/hooks/api/labels';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import MoreHoriz from '@mui/icons-material/MoreHoriz';
+import Label from '@/components/templates/Label';
 
 const drawerWidth = 240;
 
@@ -131,7 +134,7 @@ export default function BaseLayout({ children }: { children: any }) {
   const [open, setOpen] = React.useState(false);
   const [labelDialogOpen, setLabelDialogOpen] = React.useState(false);
   const [favoriteDialogOpen, setFavoriteDialogOpen] = React.useState(false);
-  const {data: labels} = useLabels()
+  const { data: labels } = useLabels();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -153,19 +156,18 @@ export default function BaseLayout({ children }: { children: any }) {
   };
 
   const handleLabelFormSubmit = async (values) => {
-    console.log('values ', values)
+    console.log('values ', values);
     await apiClient.post('/labels', values);
-    handleLabelDialogClose()
-  }
+    handleLabelDialogClose();
+  };
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const hadleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const isOpen = Boolean(anchorEl);
 
   const items = [
@@ -222,7 +224,7 @@ export default function BaseLayout({ children }: { children: any }) {
               <AccountCircleIcon></AccountCircleIcon>
               <div>
                 <IconButton
-                  onClick={handleClick}
+                  onClick={hadleClick}
                   color="inherit"
                   style={{ padding: '0px' }}
                 >
@@ -333,16 +335,9 @@ export default function BaseLayout({ children }: { children: any }) {
             </ListItem>
 
             {/* TODO: display labels */}
-            {labels.map(
-              (label) => (
-                <ListItem button key={label.id}>
-                  <ListItemIcon>
-                    <LabelIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={label.name} />
-                </ListItem>
-              )
-            )}
+            {labels.map((label) => (
+              <Label label={label} key={label.id} />
+            ))}
           </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
