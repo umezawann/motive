@@ -1,26 +1,49 @@
 import { Injectable } from '@nestjs/common';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { UpdateFavoriteDto } from './dto/update-favorite.dto';
+import { prisma } from '@/prisma';
 
 @Injectable()
 export class FavoritesService {
-  create(createFavoriteDto: CreateFavoriteDto) {
-    return 'This action adds a new favorite';
+  async createLabelFavorite(labelId: string) {
+    const labelFavorite = await prisma.labelFavorite.findFirst({
+      where: {
+        labelId
+      }
+    })
+
+    if (labelFavorite) return labelFavorite
+
+    const newLabelFavorite = await prisma.labelFavorite.create({
+      data: {
+        label: {
+          connect: {
+            id: labelId,
+          }
+        },
+        favorite: {
+          create: {
+          }
+        }
+      }
+    })
+
+    return newLabelFavorite;
   }
 
-  findAll() {
+  async findAll() {
     return `This action returns all favorites`;
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return `This action returns a #${id} favorite`;
   }
 
-  update(id: number, updateFavoriteDto: UpdateFavoriteDto) {
+  async update(id: number, updateFavoriteDto: UpdateFavoriteDto) {
     return `This action updates a #${id} favorite`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} favorite`;
   }
 }
