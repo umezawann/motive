@@ -1,6 +1,6 @@
 import { useTasksOfLabel } from "@/lib/api/labels";
 
-export const useHooks = (id) => {
-    const { date } = useTasksOfLabel(id);
-    return { tasks: date}
+export const useHooks = (id: string) => {
+    const { data } = useTasksOfLabel(id);
+    return { tasks: data}
 };

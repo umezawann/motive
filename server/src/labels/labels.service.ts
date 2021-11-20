@@ -22,6 +22,7 @@ export class LabelsService {
   // }
 
   async findOne(id: string) {
+    console.log('id', id)
     return await prisma.labelsOnTasks.findMany({
       where: { labelId: id},
       include: { task: true }
