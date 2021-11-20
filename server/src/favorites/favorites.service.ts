@@ -32,7 +32,17 @@ export class FavoritesService {
   }
 
   async findAll() {
-    return `This action returns all favorites`;
+    const favorites = await prisma.labelFavorite.findMany({
+      select: {
+        id: true,
+        labelId: true,
+        label: true,
+        favorite: true,
+        favoriteId: true,
+      }
+    })
+
+    return favorites;
   }
 
   async findOne(id: number) {

@@ -31,6 +31,7 @@ import Stack from '@mui/material/Stack';
 import LabelFormDialog from '@/components/templates/LabelFormDialog/index';
 import { apiClient } from '@/lib/axios';
 import { useLabels } from '@/hooks/api/labels';
+import { useFavorites } from '@/hooks/api/favorites';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import Label from '@/components/templates/Label';
@@ -135,6 +136,7 @@ export default function BaseLayout({ children }: { children: any }) {
   const [labelDialogOpen, setLabelDialogOpen] = React.useState(false);
   const [favoriteDialogOpen, setFavoriteDialogOpen] = React.useState(false);
   const { data: labels } = useLabels();
+  const { data: favorites } = useFavorites();
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -184,6 +186,8 @@ export default function BaseLayout({ children }: { children: any }) {
       component: <FormatAlignLeftIcon />,
     },
   ];
+
+  console.log('favorites', favorites);
 
   return (
     <>
@@ -307,17 +311,9 @@ export default function BaseLayout({ children }: { children: any }) {
               <div>Favorite</div>
             </ListItem>
 
-            {/* TODO: use favorites */}
-            {/* {labels.map(
-              (label) => (
-                <ListItem button key={label.id}>
-                  <ListItemIcon>
-                    <LabelIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={label.name} />
-                </ListItem>
-              )
-            )} */}
+            {favorites.map((favorite) => (
+              <Label label={favorite.label} key={favorite.id} />
+            ))}
           </List>
 
           <List>
