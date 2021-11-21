@@ -21,10 +21,10 @@ export class LabelsService {
   //   return `This action returns a #${id} label`;
   // }
 
-  async findOne(id: string) {
-    console.log('id', id)
+  async findOne(labelId: string) {
+    console.log('id', labelId)
     return await prisma.labelsOnTasks.findMany({
-      where: { labelId: id},
+      where: { labelId},
       include: { task: true }
     })
     ;

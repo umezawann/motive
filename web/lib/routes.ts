@@ -4,6 +4,7 @@ const paths = {
   settings: '/settings',
   logs: '/logs',
   upcoming: '/upcoming',
+  labels: '/labels'
 }
 
 export const getRoutes = (key: keyof typeof paths) => {
