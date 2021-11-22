@@ -64,6 +64,12 @@ export class TasksService {
     return tasks;
   }
 
+  async findTasksPerYear() {
+    console.log('hogehoge')
+
+    return null
+  }
+
   async findOne(id: string) {
     const task = await prisma.task.findUnique({ where: { id } });
     return task;

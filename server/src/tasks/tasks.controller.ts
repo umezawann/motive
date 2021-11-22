@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, UseGuards, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -22,6 +22,13 @@ export class TasksController {
   @Get('today')
   async findToday() {
     return this.tasksService.findToday();
+  }
+
+  // TODO: 名前を入れる
+  @Get('xxx')
+  async findTasksPerYear(@Query() query: any) {
+    console.log('query', query)
+    return await this.tasksService.findTasksPerYear();
   }
 
   @Get(':id')
