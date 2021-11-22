@@ -53,7 +53,10 @@ export class FavoritesService {
     return `This action updates a #${id} favorite`;
   }
 
-  async remove(id: number) {
-    return `This action removes a #${id} favorite`;
+  async remove(labelId: string) {
+    const favorites = await prisma.labelFavorite.delete({
+      where : { labelId }
+    })
+    return favorites;
   }
 }

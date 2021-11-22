@@ -29,8 +29,8 @@ export class FavoritesController {
     return this.favoritesService.update(+id, updateFavoriteDto);
   }
 
-  @Delete(':id')
+  @Delete('labels/:id')
   async remove(@Param('id') id: string) {
-    return this.favoritesService.remove(+id);
+    return this.favoritesService.remove(id);
   }
 }

@@ -35,6 +35,7 @@ import { useFavorites } from '@/hooks/api/favorites';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import Label from '@/components/templates/Label';
+import Favorite from '@/components/templates/Favorite';
 
 const drawerWidth = 240;
 
@@ -312,7 +313,7 @@ export default function BaseLayout({ children }: { children: any }) {
             </ListItem>
 
             {favorites.map((favorite) => (
-              <Label label={favorite.label} key={favorite.id} />
+              <Favorite label={favorite.label} key={favorite.id} />
             ))}
           </List>
 
