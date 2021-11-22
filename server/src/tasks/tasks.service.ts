@@ -18,18 +18,17 @@ export class TasksService {
     // TODO: 親タスクだけ持ってきたい （条件: parentTaskIdが存在しない場合、という条件文を追加する）
     // ref: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#where
     const tasks = await prisma.task.findMany({
-      where : {
-        parentTaskId: null
-      }});
+      where: {
+        parentTaskId: null,
+      },
+    });
 
     return tasks;
   }
 
   async findToday() {
     const today = dayjs().startOf('day');
-    console.log('today is', today);
     const tomorrow = dayjs().add(1, 'day').startOf('day');
-    console.log('tomorrow is', tomorrow);
 
     // TODO: 親タスクだけ持ってきたい （条件: parentTaskIdが存在しない場合、という条件文を追加する）
     // ref: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#where
@@ -58,7 +57,7 @@ export class TasksService {
         parentTaskId: true,
         parentTask: true,
         subTasks: true,
-      }
+      },
     });
 
     return tasks;
@@ -70,11 +69,32 @@ export class TasksService {
   }
 
   async update(id: string, updateTaskDto: UpdateTaskDto) {
-    const { title, point } = updateTaskDto;
-    return await prisma.task.update({
-      where: { id },
-      data: { title, point },
-    });
+    console.log('updateTaskDto', updateTaskDto);
+    if (updateTaskDto.subTask) {
+      const { subTask } = updateTaskDto;
+      console.log('subTask', subTask);
+      return await prisma.task.update({
+        where: { id },
+        data: {
+          subTasks: {
+            create: {
+              title: subTask,
+              point: 1,
+              status: 'TODO',
+              date: new Date(),
+            },
+          },
+        },
+      });
+    } else {
+      const { title, point } = updateTaskDto;
+      console.log('updateTaskDto is', updateTaskDto);
+
+      return await prisma.task.update({
+        where: { id },
+        data: { title, point },
+      });
+    }
   }
 
   async remove(id: string) {
