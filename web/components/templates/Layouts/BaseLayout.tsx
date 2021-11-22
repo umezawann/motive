@@ -35,7 +35,7 @@ import { useFavorites } from '@/hooks/api/favorites';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import Label from '@/components/templates/Label';
-import Favorite from '../Favorite';
+import Favorite from '@/components/templates/Favorite';
 
 const drawerWidth = 240;
 
