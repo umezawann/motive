@@ -76,7 +76,7 @@ const Task = ({ task }: TaskPropType) => {
         handleClose={handleClose}
         task={task}
         handleSubmit={handleSubmit}
-        subTask={subTaskSubmit}
+        subTaskSubmit={subTaskSubmit}
       />
     </>
   );
@@ -94,7 +94,7 @@ interface FormDialogProp {
     title: any;
     point: number;
   };
-  subTask: (id: string, body: { subTask: string }) => Promise<void>;
+  subTaskSubmit: (id: string, body: { subTask: string }) => Promise<void>;
 }
 
 function FormDialog({
@@ -102,7 +102,7 @@ function FormDialog({
   handleClose,
   task,
   handleSubmit,
-  subTask,
+  subTaskSubmit,
 }: FormDialogProp) {
   const [title, setTitle] = React.useState(task.title);
   const [point, setPoint] = React.useState(task.point);
@@ -140,7 +140,7 @@ function FormDialog({
           Save
         </Button>
       </DialogActions>
-      <SubTaskFormDialog id={task.id} handleSubmit={subTask} />
+      <SubTaskFormDialog id={task.id} handleSubmit={subTaskSubmit} />
     </Dialog>
   );
 }
