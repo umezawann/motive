@@ -67,11 +67,11 @@ export class TasksService {
     const task = await prisma.task.findUnique({ where: { id } });
     return task;
   }
-
+  
   async update(id: string, updateTaskDto: UpdateTaskDto) {
+    const {  title, point, subTask } = updateTaskDto;
     console.log('updateTaskDto', updateTaskDto);
     if (updateTaskDto.subTask) {
-      const { subTask } = updateTaskDto;
       console.log('subTask', subTask);
       return await prisma.task.update({
         where: { id },
@@ -87,9 +87,7 @@ export class TasksService {
         },
       });
     } else {
-      const { title, point } = updateTaskDto;
       console.log('updateTaskDto is', updateTaskDto);
-
       return await prisma.task.update({
         where: { id },
         data: { title, point },
