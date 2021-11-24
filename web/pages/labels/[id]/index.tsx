@@ -6,12 +6,11 @@ const Labels: NextPage = () => {
   const router = useRouter();
   console.log('router', router)
   console.log('router.query', router.query)
-  // console.log('router', router)
-  const { pid } = router.query
+  const { id } = router.query
 
   return (
     <BaseLayout>
-      Post: {pid}
+      Post: {id}
     </BaseLayout>
   );
 };
