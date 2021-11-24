@@ -71,7 +71,7 @@ export class TasksService {
   async update(id: string, updateTaskDto: UpdateTaskDto) {
     const {  title, point, subTask } = updateTaskDto;
     console.log('updateTaskDto', updateTaskDto);
-    if (updateTaskDto.subTask) {
+    if (subTask) {
       console.log('subTask', subTask);
       return await prisma.task.update({
         where: { id },
