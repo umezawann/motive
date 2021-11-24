@@ -2,6 +2,7 @@ import { Controller, UseGuards, Get, Post, Body, Patch, Param, Delete, Query } f
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { findTaskOfYearDto } from './dto/find-task-of-year.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 
 @UseGuards(JwtAuthGuard)
@@ -26,7 +27,7 @@ export class TasksController {
 
   // TODO: 名前を入れる
   @Get('query')
-  async findTasksPerYear(@Query() query: any) {
+  async findTasksPerYear(@Query() query: findTaskOfYearDto) {
     console.log('query', query)
     return await this.tasksService.findTasksPerYear(query);
   }

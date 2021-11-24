@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { findTaskOfYearDto } from './dto/find-task-of-year.dto';
 import { prisma } from '@/prisma';
 import * as dayjs from 'dayjs';
 
@@ -65,11 +66,11 @@ export class TasksService {
     return tasks;
   }
 
-  async findTasksPerYear(query: object) {
-    console.log('query value', query['year']);
-    const year = query['year'];
-    const startOfYear = dayjs(`${year}-01-01`).toDate();
-    const endOfYear = dayjs(`${year}-12-31`).toDate();
+  async findTasksPerYear(query: findTaskOfYearDto) {
+    console.log('query value', query);
+    const { year } = query;
+    const startOfYear = dayjs().set('year', parseInt(year)).startOf('year').toDate();
+    const endOfYear = dayjs().set('year', parseInt(year)).endOf('year').toDate();
     const tasks = await prisma.task.findMany({
       where: {
         AND: [
