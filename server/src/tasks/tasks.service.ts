@@ -18,9 +18,10 @@ export class TasksService {
     // TODO: 親タスクだけ持ってきたい （条件: parentTaskIdが存在しない場合、という条件文を追加する）
     // ref: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#where
     const tasks = await prisma.task.findMany({
-      where : {
-        parentTaskId: null
-      }});
+      where: {
+        parentTaskId: null,
+      },
+    });
 
     return tasks;
   }
@@ -58,16 +59,34 @@ export class TasksService {
         parentTaskId: true,
         parentTask: true,
         subTasks: true,
-      }
+      },
     });
 
     return tasks;
   }
 
-  async findTasksPerYear() {
-    console.log('hogehoge')
-
-    return null
+  async findTasksPerYear(query: object) {
+    console.log('query value', query['year']);
+    const year = query['year'];
+    const startOfYear = dayjs(`${year}-01-01`).toDate();
+    const endOfYear = dayjs(`${year}-12-31`).toDate();
+    const tasks = await prisma.task.findMany({
+      where: {
+        AND: [
+          {
+            date: {
+              gte: startOfYear,
+            },
+          },
+          {
+            date: {
+              lt: endOfYear,
+            },
+          },
+        ],
+      },
+    });
+    return tasks;
   }
 
   async findOne(id: string) {

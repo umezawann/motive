@@ -3,6 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useApiClient } from "@/lib/api/apiClient";
+import Task from "@/components/templates/Task/Task";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -38,6 +40,22 @@ function a11yProps(index: number) {
 }
 
 export default function VerticalTabs() {
+
+  const useTasksOfDay = () => {
+    console.log('iseTasksOfDay')
+    const { response, loading, error } = useApiClient({
+      method: "GET",
+      url: "/tasks/today/qurey?year=2021",
+    });
+
+
+    return { data: response, loading, error };
+  };
+  const { data: tasksOfDay } = useTasksOfDay();
+  console.log('tasksOfDay', tasksOfDay)
+  // console.log('loading', loading)
+  // console.log('error', error)
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -71,9 +89,17 @@ export default function VerticalTabs() {
         <Tab label="2019" {...a11yProps(2)} />
         <Tab label="2018" {...a11yProps(3)} />
       </Tabs>
+
       <TabPanel value={value} index={0}>
+        {tasksOfDay &&
+          tasksOfDay.map((t) => (
+            <div key={t.id}>
+              <Task task={t} />
+            </div>
+          ))}
         2021
       </TabPanel>
+
       <TabPanel value={value} index={1}>
         2020
       </TabPanel>

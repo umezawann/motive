@@ -25,10 +25,10 @@ export class TasksController {
   }
 
   // TODO: 名前を入れる
-  @Get('xxx')
+  @Get('query')
   async findTasksPerYear(@Query() query: any) {
     console.log('query', query)
-    return await this.tasksService.findTasksPerYear();
+    return await this.tasksService.findTasksPerYear(query);
   }
 
   @Get(':id')
