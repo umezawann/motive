@@ -45,7 +45,7 @@ export default function VerticalTabs() {
     console.log('iseTasksOfDay')
     const { response, loading, error } = useApiClient({
       method: "GET",
-      url: "/tasks/today/qurey?year=2021",
+      url: "/tasks/query?year=2021",
     });
 
 

@@ -57,7 +57,8 @@ const Task = ({ task }: TaskPropType) => {
         <CardContent>
           <div>{task.title}</div>
           <ul>
-            {task.subTasks.map(sub => (
+            {task.subTasks &&
+            task.subTasks.map(sub => (
               <div key={sub.id}>{sub.title}</div>
             ))}
           </ul>
