@@ -159,7 +159,6 @@ export default function BaseLayout({ children }: { children: any }) {
   };
 
   const handleLabelFormSubmit = async (values) => {
-    console.log('values ', values);
     await apiClient.post('/labels', values);
     handleLabelDialogClose();
   };
@@ -187,8 +186,6 @@ export default function BaseLayout({ children }: { children: any }) {
       component: <FormatAlignLeftIcon />,
     },
   ];
-
-  console.log('favorites', favorites);
 
   return (
     <>
@@ -312,7 +309,7 @@ export default function BaseLayout({ children }: { children: any }) {
               <div>Favorite</div>
             </ListItem>
 
-            {favorites.map((favorite) => (
+            {favorites && favorites.map((favorite) => (
               <Favorite label={favorite.label} key={favorite.id} />
             ))}
           </List>
@@ -332,7 +329,7 @@ export default function BaseLayout({ children }: { children: any }) {
             </ListItem>
 
             {/* TODO: display labels */}
-            {labels.map((label) => (
+            {labels && labels.map((label) => (
               <Label label={label} key={label.id} />
             ))}
           </List>

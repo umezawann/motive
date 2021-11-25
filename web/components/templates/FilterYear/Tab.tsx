@@ -41,7 +41,6 @@ function a11yProps(index: number) {
 
 export default function VerticalTabs() {
   const useTasksOfDay = (year: string) => {
-    console.log("iseTasksOfDay");
     const { response, loading, error } = useApiClient({
       method: "GET",
       url: `/tasks/query?year=${year}`,
