@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { findTaskOfYearDto } from './dto/find-task-of-year.dto';
 import { prisma } from '@/prisma';
 import * as dayjs from 'dayjs';
 import { findTaskOfYearDto } from './dto/find-task-of-year.dto';
@@ -29,9 +30,7 @@ export class TasksService {
 
   async findToday() {
     const today = dayjs().startOf('day');
-    console.log('today is', today);
     const tomorrow = dayjs().add(1, 'day').startOf('day');
-    console.log('tomorrow is', tomorrow);
 
     // TODO: 親タスクだけ持ってきたい （条件: parentTaskIdが存在しない場合、という条件文を追加する）
     // ref: https://www.prisma.io/docs/reference/api-reference/prisma-client-reference#where
@@ -94,13 +93,32 @@ export class TasksService {
     const task = await prisma.task.findUnique({ where: { id } });
     return task;
   }
-
+  
   async update(id: string, updateTaskDto: UpdateTaskDto) {
-    const { title, point } = updateTaskDto;
-    return await prisma.task.update({
-      where: { id },
-      data: { title, point },
-    });
+    const {  title, point, subTask } = updateTaskDto;
+    console.log('updateTaskDto', updateTaskDto);
+    if (subTask) {
+      console.log('subTask', subTask);
+      return await prisma.task.update({
+        where: { id },
+        data: {
+          subTasks: {
+            create: {
+              title: subTask,
+              point: 1,
+              status: 'TODO',
+              date: new Date(),
+            },
+          },
+        },
+      });
+    } else {
+      console.log('updateTaskDto is', updateTaskDto);
+      return await prisma.task.update({
+        where: { id },
+        data: { title, point },
+      });
+    }
   }
 
   async remove(id: string) {
