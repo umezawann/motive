@@ -17,5 +17,8 @@ export class CreateTaskDto {
 
   @ApiProperty()
   point: number
+
+  @ApiProperty()
+  subTask: string
 }
 

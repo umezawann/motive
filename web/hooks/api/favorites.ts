@@ -1,9 +1,9 @@
 import { useAxios } from '@/lib/axios';
 
-export const useLabels = () => {
+export const useFavorites = () => {
   const { response, loading } = useAxios({
     method: 'GET',
-    url: '/labels',
+    url: '/favorites',
   });
 
   const data = loading ? [] : response;

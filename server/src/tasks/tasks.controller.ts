@@ -1,8 +1,10 @@
-import { Controller, UseGuards, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, UseGuards, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { findTaskOfYearDto } from './dto/find-task-of-year.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
+
 @UseGuards(JwtAuthGuard)
 @Controller('tasks')
 export class TasksController {
@@ -10,8 +12,6 @@ export class TasksController {
 
   @Post()
   async create(@Body() createTaskDto: CreateTaskDto) {
-    console.log('tasks create')
-    console.log(createTaskDto)
     return await this.tasksService.create(createTaskDto);
   }
 
@@ -23,6 +23,13 @@ export class TasksController {
   @Get('today')
   async findToday() {
     return this.tasksService.findToday();
+  }
+
+  // TODO: 名前を入れる
+  @Get('query')
+  async findTasksPerYear(@Query() query: findTaskOfYearDto) {
+    console.log('query', query)
+    return await this.tasksService.findTasksPerYear(query);
   }
 
   @Get(':id')

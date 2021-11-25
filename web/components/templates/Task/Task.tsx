@@ -1,16 +1,17 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { apiClient } from '@/lib/axios';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { apiClient } from "@/lib/axios";
+import SubTaskFormDialog from "components/templates/SubTask";
 
 type TaskType = {
   id: string;
@@ -20,8 +21,8 @@ type TaskType = {
 };
 
 type ParentTaskType = TaskType & {
-  subTasks: TaskType[]
-}
+  subTasks: TaskType[];
+};
 
 type TaskPropType = {
   task: ParentTaskType;
@@ -42,13 +43,20 @@ const Task = ({ task }: TaskPropType) => {
     id: string,
     body: { title: string; point: number }
   ) => {
-    console.log('handleSubmit id', id);
+    console.log("handleSubmit id", id);
     // hint: web/pages/today/hooks.ts のaxios.postらへん
     // const body = [{ ...title}, { ...point}];
     // const body = {title, point}
-    console.log('body is', body);
+    console.log("body is", body);
     const res = await apiClient.post(`/tasks/${id}`, body);
-    console.log('res is', res);
+    console.log("res is", res);
+  };
+
+  const subTaskSubmit = async (id: string, body: { subTask: string }) => {
+    console.log("subTask id", id);
+    console.log("body is", body);
+    const res = await apiClient.post(`/tasks/${id}`, body);
+    console.log("res is", res);
   };
 
   return (
@@ -57,7 +65,7 @@ const Task = ({ task }: TaskPropType) => {
         <CardContent>
           <div>{task.title}</div>
           <ul>
-            {task.subTasks.map(sub => (
+            {task.subTasks.map((sub) => (
               <div key={sub.id}>{sub.title}</div>
             ))}
           </ul>
@@ -68,6 +76,7 @@ const Task = ({ task }: TaskPropType) => {
         handleClose={handleClose}
         task={task}
         handleSubmit={handleSubmit}
+        subTaskSubmit={subTaskSubmit}
       />
     </>
   );
@@ -85,12 +94,19 @@ interface FormDialogProp {
     title: any;
     point: number;
   };
+  subTaskSubmit: (id: string, body: { subTask: string }) => Promise<void>;
 }
 
-function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
+function FormDialog({
+  open,
+  handleClose,
+  task,
+  handleSubmit,
+  subTaskSubmit,
+}: FormDialogProp) {
   const [title, setTitle] = React.useState(task.title);
   const [point, setPoint] = React.useState(task.point);
-  console.log('FormDialog task is', task);
+  console.log("FormDialog task is", task);
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -124,6 +140,7 @@ function FormDialog({ open, handleClose, task, handleSubmit }: FormDialogProp) {
           Save
         </Button>
       </DialogActions>
+      <SubTaskFormDialog id={task.id} handleSubmit={subTaskSubmit} />
     </Dialog>
   );
 }
