@@ -4,7 +4,6 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { findTaskOfYearDto } from './dto/find-task-of-year.dto';
 import { prisma } from '@/prisma';
 import * as dayjs from 'dayjs';
-import { findTaskOfYearDto } from './dto/find-task-of-year.dto';
 
 @Injectable()
 export class TasksService {
