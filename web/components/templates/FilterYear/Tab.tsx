@@ -40,21 +40,31 @@ function a11yProps(index: number) {
 }
 
 export default function VerticalTabs() {
-
-  const useTasksOfDay = () => {
-    console.log('iseTasksOfDay')
+  const useTasksOfDay = (year: string) => {
+    console.log("iseTasksOfDay");
     const { response, loading, error } = useApiClient({
       method: "GET",
-      url: "/tasks/query?year=2021",
+      url: `/tasks/query?year=${year}`,
     });
-
 
     return { data: response, loading, error };
   };
-  const { data: tasksOfDay } = useTasksOfDay();
-  console.log('tasksOfDay', tasksOfDay)
-  // console.log('loading', loading)
-  // console.log('error', error)
+
+  // const years = ["2021", "2020", "2019", "2018"];
+
+  // function years(index: number) {
+  //   year.map((year) => {
+  //     const { data: task2021 } = useTasksOfDay("2021");
+  //   });
+  //   return null;
+  // }
+
+  const { data: task2021 } = useTasksOfDay("2021");
+  const { data: task2020 } = useTasksOfDay("2020");
+  const { data: task2019 } = useTasksOfDay("2019");
+  const { data: task2018 } = useTasksOfDay("2018");
+  const taskInYears = [task2021, task2020, task2019, task2018];
+  console.log("taskInYears", taskInYears);
 
   const [value, setValue] = React.useState(0);
 
@@ -90,25 +100,16 @@ export default function VerticalTabs() {
         <Tab label="2018" {...a11yProps(3)} />
       </Tabs>
 
-      <TabPanel value={value} index={0}>
-        {tasksOfDay &&
-          tasksOfDay.map((t) => (
-            <div key={t.id}>
-              <Task task={t} />
-            </div>
-          ))}
-        2021
-      </TabPanel>
-
-      <TabPanel value={value} index={1}>
-        2020
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        2019
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        2018
-      </TabPanel>
+      {taskInYears.map((year, index) => (
+        <TabPanel value={value} index={index} key={index}>
+          {year &&
+            year.map((t) => (
+              <div key={t.id}>
+                <Task task={t} />
+              </div>
+            ))}
+        </TabPanel>
+      ))}
     </Box>
   );
 }
