@@ -6,7 +6,7 @@ import { prisma } from '@/prisma';
 @Injectable()
 export class LabelsService {
   async create(createLabelDto: CreateLabelDto) {
-    console.log('createLabelDto', createLabelDto)
+    console.log('createLabelDto', createLabelDto);
     const label = await prisma.label.create({ data: createLabelDto });
 
     return label;
@@ -17,22 +17,16 @@ export class LabelsService {
     return labels;
   }
 
-  // async findOne(id: number) {
-  //   return `This action returns a #${id} label`;
-  // }
-
   async findOne(labelId: string) {
-    console.log('id', labelId)
     return await prisma.labelsOnTasks.findMany({
-      where: { labelId},
-      include: { task: true }
-    })
-    ;
+      where: { labelId },
+      include: { task: true },
+    });
   }
 
   async update(id: string, updateLabelDto: UpdateLabelDto) {
     const { name, color } = updateLabelDto;
-    console.log('label is', updateLabelDto)
+    console.log('label is', updateLabelDto);
     return await prisma.label.update({
       where: { id },
       data: { name, color },
