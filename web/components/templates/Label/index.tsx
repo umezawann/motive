@@ -112,7 +112,6 @@ const Label = ({ label }: LabelPropType) => {
                 </Stack>
               </CardContent>
             </Card>
-
             <FormDialog
               open={open}
               handleClose={handleClose}
