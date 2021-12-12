@@ -14,7 +14,7 @@ const Logs: NextPage = () => {
   // sample
   const year = router.query?.year
   // const hoge = useTasksInYear(year)
-
+  console.log('year', year)
   // sample
   useEffect(() => {
     console.log('useEffect is called')
@@ -32,7 +32,7 @@ const Logs: NextPage = () => {
                   onClick={() => {
                     router.push({
                       pathname: '/logs',
-                      query: { year: '2021' },
+                      query: { year: '2020' },
                     });
                   }}
                 >
@@ -48,7 +48,7 @@ const Logs: NextPage = () => {
               <Grid item xs={2} sm={2} />
             </Grid>
           </div>
-          <VerticalTabs />
+          <VerticalTabs year={ year } />
         </Stack>
       </BaseLayout>
     </div>

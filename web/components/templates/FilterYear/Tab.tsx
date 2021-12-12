@@ -3,8 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useApiClient } from "@/lib/api/apiClient";
 import Task from "@/components/templates/Task/Task";
+import { useHooks } from './hooks'
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -39,15 +39,15 @@ function a11yProps(index: number) {
   };
 }
 
-export default function VerticalTabs() {
-  const useTasksOfDay = (year: string) => {
-    const { response, loading, error } = useApiClient({
-      method: "GET",
-      url: `/tasks/query?year=${year}`,
-    });
+export default function VerticalTabs(year) {
+  // const useTasksOfDay = (year: string) => {
+  //   const { response, loading, error } = useApiClient({
+  //     method: "GET",
+  //     url: `/tasks/query?year=${year}`,
+  //   });
 
-    return { data: response, loading, error };
-  };
+  //   return { data: response, loading, error };
+  // };
 
   // const years = ["2021", "2020", "2019", "2018"];
 
@@ -58,12 +58,13 @@ export default function VerticalTabs() {
   //   return null;
   // }
 
-  const { data: task2021 } = useTasksOfDay("2021");
-  const { data: task2020 } = useTasksOfDay("2020");
-  const { data: task2019 } = useTasksOfDay("2019");
-  const { data: task2018 } = useTasksOfDay("2018");
+  const { data } = useHooks(year);
+  const { data: task2021 } = useHooks("2021");
+  const { data: task2020 } = useHooks("2020");
+  const { data: task2019 } = useHooks("2019");
+  const { data: task2018 } = useHooks("2018");
   const taskInYears = [task2021, task2020, task2019, task2018];
-  console.log("taskInYears", taskInYears);
+  // console.log("taskInYears", taskInYears);
 
   const [value, setValue] = React.useState(0);
 
@@ -93,14 +94,23 @@ export default function VerticalTabs() {
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: "divider" }}
       >
-        <Tab label="2021" {...a11yProps(0)} />
+        <Tab label="2021" {...a11yProps(2021)} />
         <Tab label="2020" {...a11yProps(1)} />
         <Tab label="2019" {...a11yProps(2)} />
         <Tab label="2018" {...a11yProps(3)} />
       </Tabs>
 
+      {/* <TabPanel value={value} index={0}>
+          {data &&
+            data.map((t) => (
+              <div key={t.id}>
+                <Task task={t} />
+              </div>
+            ))}
+        </TabPanel> */}
+
       {taskInYears.map((year, index) => (
-        <TabPanel value={value} index={index} key={index}>
+        <TabPanel value={value} index={0} key={index}>
           {year &&
             year.map((t) => (
               <div key={t.id}>
