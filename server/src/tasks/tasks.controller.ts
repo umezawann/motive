@@ -16,7 +16,8 @@ export class TasksController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(@Query() year: string) {
+    console.log('year is', year)
     return this.tasksService.findAll();
   }
 

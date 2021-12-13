@@ -8,17 +8,21 @@ import { useHooks } from './hooks';
 import VerticalTabs from '@/components/templates/FilterYear/Tab';
 import Stack from '@mui/material/Stack';
 import { useRouter } from 'next/router';
+
 const Logs: NextPage = () => {
-  const { onSubmit, tasks, tasksInYear } = useHooks();
   const router = useRouter();
+  const year = typeof router.query?.year === 'string' ? router.query?.year : '2020'
+  const { onSubmit, tasks, tasksInYear } = useHooks(year);
+  const [currentYear, setCurrentYear] = useState(2021)
+  // const router = useRouter();
   // sample
-  const year = router.query?.year
+  // const year = router.query?.year
   // const hoge = useTasksInYear(year)
-  console.log('year', year)
+  // console.log('year', year)
   // sample
-  useEffect(() => {
-    console.log('useEffect is called')
-  }, [year]);
+  // useEffect(() => {
+  //   console.log('useEffect is called')
+  // }, [year]);
 
   return (
     <div>
@@ -48,7 +52,7 @@ const Logs: NextPage = () => {
               <Grid item xs={2} sm={2} />
             </Grid>
           </div>
-          <VerticalTabs year={ year } />
+          <VerticalTabs year={currentYear} handleChange={setCurrentYear} />
         </Stack>
       </BaseLayout>
     </div>

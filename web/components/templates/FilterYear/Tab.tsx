@@ -1,20 +1,22 @@
-import * as React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Task from "@/components/templates/Task/Task";
-import { useHooks } from './hooks'
+import * as React from 'react';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Task from '@/components/templates/Task/Task';
+import { useHooks } from './hooks';
 
 interface TabPanelProps {
   children?: React.ReactNode;
-  index: number;
-  value: number;
+
+  index?: string;
+  value?: string;
 }
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
-
+  console.log('TabPanel: value', value);
+  console.log('TabPanel: index', index);
   return (
     <div
       role="tabpanel"
@@ -35,11 +37,11 @@ function TabPanel(props: TabPanelProps) {
 function a11yProps(index: number) {
   return {
     id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
+    'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
 
-export default function VerticalTabs(year) {
+export default function VerticalTabs(year: string, handleChange: () => void) {
   // const useTasksOfDay = (year: string) => {
   //   const { response, loading, error } = useApiClient({
   //     method: "GET",
@@ -59,11 +61,11 @@ export default function VerticalTabs(year) {
   // }
 
   const { data } = useHooks(year);
-  const { data: task2021 } = useHooks("2021");
-  const { data: task2020 } = useHooks("2020");
-  const { data: task2019 } = useHooks("2019");
-  const { data: task2018 } = useHooks("2018");
-  const taskInYears = [task2021, task2020, task2019, task2018];
+  // const { data: task2021 } = useHooks("2021");
+  // const { data: task2020 } = useHooks("2020");
+  // const { data: task2019 } = useHooks("2019");
+  // const { data: task2018 } = useHooks("2018");
+  // const taskInYears = [year];
   // console.log("taskInYears", taskInYears);
 
   const [value, setValue] = React.useState(0);
@@ -76,8 +78,8 @@ export default function VerticalTabs(year) {
     <Box
       sx={{
         flexGrow: 1,
-        bgcolor: "background.paper",
-        display: "flex",
+        bgcolor: 'background.paper',
+        display: 'flex',
         height: 224,
       }}
     >
@@ -88,11 +90,11 @@ export default function VerticalTabs(year) {
         onChange={handleChange}
         TabIndicatorProps={{
           style: {
-            display: "none",
+            display: 'none',
           },
         }}
         aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: "divider" }}
+        sx={{ borderRight: 1, borderColor: 'divider' }}
       >
         <Tab label="2021" {...a11yProps(2021)} />
         <Tab label="2020" {...a11yProps(1)} />
@@ -100,25 +102,30 @@ export default function VerticalTabs(year) {
         <Tab label="2018" {...a11yProps(3)} />
       </Tabs>
 
-      {/* <TabPanel value={value} index={0}>
+      {/* <TabPanel value={value} index={year}>
           {data &&
-            data.map((t) => (
+            data.map((t ,idx) => (
               <div key={t.id}>
                 <Task task={t} />
               </div>
             ))}
         </TabPanel> */}
 
-      {taskInYears.map((year, index) => (
-        <TabPanel value={value} index={0} key={index}>
-          {year &&
+      {/* TODO: ここでYearコンポーネントを出せばよい */}
+      {/* <div>
+        <div>今までのタスクを振り返り</div>
+        {tasksInYear && <Year tasks={tasksInYear} />}
+      </div> */}
+
+      {/* {taskInYears.map((year, index) => (
+          year &&
             year.map((t) => (
               <div key={t.id}>
                 <Task task={t} />
               </div>
-            ))}
+            ))
         </TabPanel>
-      ))}
+      ))} */}
     </Box>
   );
 }
