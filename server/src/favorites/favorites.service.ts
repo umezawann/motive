@@ -41,7 +41,7 @@ export class FavoritesService {
         favoriteId: true,
       }
     })
-
+    console.log('favorites', favorites)
     return favorites;
   }
 

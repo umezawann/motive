@@ -21,7 +21,8 @@ const Today: NextPage = () => {
             <div style={{ margin: 'auto' }}>本日のタスク</div>
             <TaskForm onSubmit={onSubmit} />
             <Stack spacing={2}>
-              {tasks &&
+              {
+              tasks &&
                 tasks.map((t) => (
                   <div key={t.id}>
                     <Task task={t} />
