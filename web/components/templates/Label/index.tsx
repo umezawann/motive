@@ -22,6 +22,7 @@ import MoreHoriz from '@mui/icons-material/MoreHoriz';
 import Popover from '@mui/material/Popover';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import { Link } from '@mui/material';
 
 type LabelType = {
   id: string;
@@ -70,7 +71,7 @@ const Label = ({ label }: LabelPropType) => {
   const labelIsOpen = Boolean(anchorEl);
 
   return (
-    <>
+    <Link href={`/labels/${label.id}`} >
       <ListItem button key={label.id}>
         <ListItemIcon>
           <LabelIcon sx={{ color: label.color }} />
@@ -111,7 +112,6 @@ const Label = ({ label }: LabelPropType) => {
                 </Stack>
               </CardContent>
             </Card>
-
             <FormDialog
               open={open}
               handleClose={handleClose}
@@ -121,7 +121,7 @@ const Label = ({ label }: LabelPropType) => {
           </Popover>{' '}
         </div>
       </ListItem>
-    </>
+    </Link>
   );
 };
 

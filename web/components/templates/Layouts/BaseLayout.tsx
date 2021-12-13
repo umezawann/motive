@@ -312,7 +312,7 @@ export default function BaseLayout({ children }: { children: any }) {
               <div>Favorite</div>
             </ListItem>
 
-            {favorites.map((favorite) => (
+            {favorites && favorites.map((favorite) => (
               <Favorite label={favorite.label} key={favorite.id} />
             ))}
           </List>
@@ -332,7 +332,7 @@ export default function BaseLayout({ children }: { children: any }) {
             </ListItem>
 
             {/* TODO: display labels */}
-            {labels.map((label) => (
+            {labels && labels.map((label) => (
               <Label label={label} key={label.id} />
             ))}
           </List>

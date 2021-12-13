@@ -22,7 +22,8 @@ export class LabelsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.labelsService.findOne(+id);
+    console.log('id is', id)
+    return await this.labelsService.findOne(id);
   }
 
   @Post(':id')
