@@ -8,6 +8,7 @@ import { useHooks } from './hooks';
 import VerticalTabs from '@/components/templates/FilterYear/Tab';
 import Stack from '@mui/material/Stack';
 import { useRouter } from 'next/router';
+import { useTasksOfDay, useTasksInYear } from '@/lib/api/tasks';
 
 const Logs: NextPage = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const Logs: NextPage = () => {
               <Grid item xs={2} sm={2} />
             </Grid>
           </div>
-          <VerticalTabs year={currentYear} handleChange={setCurrentYear} />
+          <VerticalTabs year={currentYear} handleChange={setCurrentYear} tasks={tasksInYear}/>
         </Stack>
       </BaseLayout>
     </div>

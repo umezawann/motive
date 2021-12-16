@@ -41,7 +41,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function VerticalTabs(year: string, handleChange: () => void) {
+export default function VerticalTabs(year: string, handleChange: () => void, tasks: any) {
   // const useTasksOfDay = (year: string) => {
   //   const { response, loading, error } = useApiClient({
   //     method: "GET",
@@ -68,10 +68,10 @@ export default function VerticalTabs(year: string, handleChange: () => void) {
   // const taskInYears = [year];
   // console.log("taskInYears", taskInYears);
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(222220);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setValue(event.target.label);
   };
 
   return (
