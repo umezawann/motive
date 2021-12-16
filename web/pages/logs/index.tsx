@@ -16,16 +16,6 @@ const Logs: NextPage = () => {
     typeof router.query?.year === "string" ? router.query?.year : "2020";
   const { onSubmit, tasks, tasksInYear } = useHooks(year);
   console.log("year", year)
-  // const [currentYear, setCurrentYear] = useState(2021)
-  // const router = useRouter();
-  // sample
-  // const year = router.query?.year
-  // const hoge = useTasksInYear(year)
-  // console.log('year', year)
-  // sample
-  // useEffect(() => {
-  //   console.log('useEffect is called')
-  // }, [year]);
   const handleChange = (currentYear: number) => {
     router.push({
       pathname: "/logs",
@@ -60,13 +50,6 @@ const Logs: NextPage = () => {
             <Grid container spacing={2} justifyContent="center">
               <Grid item xs={2} sm={2}>
                 <button
-                // type="button"
-                // onClick={() => {
-                //   router.push({
-                //     pathname: '/logs',
-                //     query: { year: '2020' },
-                //   });
-                // }}
                 >
                   Click here to read more
                 </button>

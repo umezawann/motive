@@ -40,37 +40,8 @@ function a11yProps(index: number) {
     'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
-const hoge = () => {
-  return 'hoge'
-};
+
 const VerticalTabs = ({ year, handleChange, tasks} : { year : string, handleChange: (currentYear: string) => void, tasks: any }) => {
-  // const useTasksOfDay = (year: string) => {
-  //   const { response, loading, error } = useApiClient({
-  //     method: "GET",
-  //     url: `/tasks/query?year=${year}`,
-  //   });
-
-  //   return { data: response, loading, error };
-  // };
-
-  // const years = ["2021", "2020", "2019", "2018"];
-
-  // function years(index: number) {
-  //   year.map((year) => {
-  //     const { data: task2021 } = useTasksOfDay("2021");
-  //   });
-  //   return null;
-  // }
-
-  // const { data } = useHooks(year);
-  // const { data: task2021 } = useHooks("2021");
-  // const { data: task2020 } = useHooks("2020");
-  // const { data: task2019 } = useHooks("2019");
-  // const { data: task2018 } = useHooks("2018");
-  // const taskInYears = [year];
-  // console.log("taskInYears", taskInYears);
-
-  // const [value, setValue] = React.useState(year);
 
   const handler = (event: React.SyntheticEvent, newValue: string) => {
     // setValue(event.target.label);
@@ -111,28 +82,12 @@ const VerticalTabs = ({ year, handleChange, tasks} : { year : string, handleChan
         <Tab label="2018" {...a11yProps(3)} value={'2018'}/>
       </Tabs>
 
-      {/* <TabPanel value={value} index={year}>
-          {data &&
-            data.map((t ,idx) => (
-              <div key={t.id}>
-                <Task task={t} />
-              </div>
-            ))}
-        </TabPanel> */}
-
-      {/* TODO: ここでYearコンポーネントを出せばよい */}
-      {/* <div>
-        <div>今までのタスクを振り返り</div>
-        {tasksInYear && <Year tasks={tasksInYear} />}
-      </div> */}
-
       { tasks &&
             tasks.map((t) => (
               <div key={t.id}>
                 <Task task={t} />
               </div>
             ))
-        // </TabPanel>
       }
     </Box>
     </>
