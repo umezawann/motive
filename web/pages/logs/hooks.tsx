@@ -5,6 +5,7 @@ import { apiClient } from '@/lib/axios'
 export const useHooks = (year: string) => {
   const { data } = useTasksOfDay();
   const { data: tasksInYear } = useTasksInYear(year);
+  console.log('yearHooks', year)
 
   const onSubmit = async (values: any) => {
     console.log('values', values);

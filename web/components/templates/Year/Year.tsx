@@ -8,7 +8,7 @@ interface Prop {
 const KEY_FORMAT = 'YYYY-MM-DD'
 const Year = ({ tasks }: Prop) => {
   const days = getDaysInYear()
-
+  console.log('Year component: tasks ', tasks)
   const tasksPerDay = {} as any
   for (const task of tasks) {
     const key = dayjs(task.date).format(KEY_FORMAT)

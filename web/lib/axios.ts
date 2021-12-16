@@ -15,7 +15,7 @@ export const useAxios = (axiosParams: AxiosRequestConfig) => {
   const [error, setError] = useState<any>('');
   const [loading, setLoading] = useState(true);
   const token = getFromStorage('accessToken');
-
+  console.log('axiosParams', axiosParams)
   useEffect(() => {
     const func = async () => {
       try {
@@ -34,7 +34,7 @@ export const useAxios = (axiosParams: AxiosRequestConfig) => {
     }
 
     func()
-  }, []); // execute once only
+  }, [axiosParams.url]); // execute once only
 
   return { response, error, loading };
 };

@@ -40,8 +40,10 @@ function a11yProps(index: number) {
     'aria-controls': `vertical-tabpanel-${index}`,
   };
 }
-
-export default function VerticalTabs(year: string, handleChange: () => void, tasks: any) {
+const hoge = () => {
+  return 'hoge'
+};
+const VerticalTabs = ({ year, handleChange, tasks} : { year : string, handleChange: (currentYear: string) => void, tasks: any }) => {
   // const useTasksOfDay = (year: string) => {
   //   const { response, loading, error } = useApiClient({
   //     method: "GET",
@@ -60,7 +62,7 @@ export default function VerticalTabs(year: string, handleChange: () => void, tas
   //   return null;
   // }
 
-  const { data } = useHooks(year);
+  // const { data } = useHooks(year);
   // const { data: task2021 } = useHooks("2021");
   // const { data: task2020 } = useHooks("2020");
   // const { data: task2019 } = useHooks("2019");
@@ -68,13 +70,20 @@ export default function VerticalTabs(year: string, handleChange: () => void, tas
   // const taskInYears = [year];
   // console.log("taskInYears", taskInYears);
 
-  const [value, setValue] = React.useState(222220);
+  // const [value, setValue] = React.useState(year);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(event.target.label);
+  const handler = (event: React.SyntheticEvent, newValue: string) => {
+    // setValue(event.target.label);
+    console.log("event", event)
+    // console.log("event.target.value", event.target.value)
+    console.log("newValue", newValue)
+    handleChange(newValue)
   };
 
+  console.log('tasks', tasks)
+
   return (
+    <>
     <Box
       sx={{
         flexGrow: 1,
@@ -86,8 +95,8 @@ export default function VerticalTabs(year: string, handleChange: () => void, tas
       <Tabs
         orientation="vertical"
         variant="scrollable"
-        value={value}
-        onChange={handleChange}
+        value={year}
+        onChange={handler}
         TabIndicatorProps={{
           style: {
             display: 'none',
@@ -96,10 +105,10 @@ export default function VerticalTabs(year: string, handleChange: () => void, tas
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
-        <Tab label="2021" {...a11yProps(2021)} />
-        <Tab label="2020" {...a11yProps(1)} />
-        <Tab label="2019" {...a11yProps(2)} />
-        <Tab label="2018" {...a11yProps(3)} />
+        <Tab label="2021" {...a11yProps(0)} value={'2021'}/>
+        <Tab label="2020" {...a11yProps(1)} value={'2020'}/>
+        <Tab label="2019" {...a11yProps(2)} value={'2019'}/>
+        <Tab label="2018" {...a11yProps(3)} value={'2018'}/>
       </Tabs>
 
       {/* <TabPanel value={value} index={year}>
@@ -117,15 +126,17 @@ export default function VerticalTabs(year: string, handleChange: () => void, tas
         {tasksInYear && <Year tasks={tasksInYear} />}
       </div> */}
 
-      {/* {taskInYears.map((year, index) => (
-          year &&
-            year.map((t) => (
+      { tasks &&
+            tasks.map((t) => (
               <div key={t.id}>
                 <Task task={t} />
               </div>
             ))
-        </TabPanel>
-      ))} */}
+        // </TabPanel>
+      }
     </Box>
+    </>
   );
 }
+
+export default VerticalTabs;

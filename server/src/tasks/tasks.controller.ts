@@ -15,6 +15,7 @@ export class TasksController {
     return await this.tasksService.create(createTaskDto);
   }
 
+  // tasks ? hoge
   @Get()
   async findAll(@Query() year: string) {
     console.log('year is', year)
@@ -27,7 +28,8 @@ export class TasksController {
   }
 
   // TODO: 名前を入れる
-  @Get('query')
+  // tasks/search ? year=1000
+  @Get('search')
   async findTasksPerYear(@Query() query: findTaskOfYearDto) {
     console.log('query', query)
     return await this.tasksService.findTasksPerYear(query);

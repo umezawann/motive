@@ -10,9 +10,10 @@ const useTasksOfDay = () => {
 };
 
 const useTasksInYear = (year: string) => {
+  console.log('useYasksInYear', year)
   const { response, loading, error } = useApiClient({
     method: 'GET',
-    url: `/tasks?year=${year}`,
+    url: `/tasks/search?year=${year}`,
   });
 
   return { data: response, loading, error };
